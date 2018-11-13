@@ -42,24 +42,6 @@ namespace KYH
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ArrayList col_list = new ArrayList();
-            ArrayList item_list = new ArrayList();
-
-            col_list.Add(new string[] { "ㅁ", "30", "L" });
-            col_list.Add(new string[] { "중요", "50", "L" });
-            col_list.Add(new string[] { "프로그램", "150", "L" });
-            col_list.Add(new string[] { "경로", "200", "L" });
-            col_list.Add(new string[] { "위치1", "80", "L" });
-            col_list.Add(new string[] { "위치2", "80", "L" });
-
-            item_list.Add(new Items(new string[] { " ㅁ ", " - ", " AlCaptur ","\"c#Program Files (x86)\\... ", "HKLM", "SOFT... " }));
-            item_list.Add(new Items(new string[] { " ㅁ ", " - ", " WindowsDefen...", "\\%ProgramFiles%\\win/... ", "HKLM", "SOFT... " }));
-            item_list.Add(new Items(new string[] { " ㅁ ", " - ", " AlCaptur ", "\"c#Program Files (x86)\\... ", "HKLM", "SOFT... " }));
-            item_list.Add(new Items(new string[] { " ㅁ ", " - ", " AlCaptur ", "\"c#Program Files (x86)\\... ", "HKLM", "SOFT... " }));
-            item_list.Add(new Items(new string[] { " ㅁ ", " - ", " AlCaptur ", "\"c#Program Files (x86)\\... ", "HKLM", "SOFT... " }));
-            item_list.Add(new Items(new string[] { " ㅁ ", " - ", " AlCaptur ", "\"c#Program Files (x86)\\... ", "HKLM", "SOFT... " }));
-            
-
             Button_Load();
 
             Panel1_Load();
@@ -110,23 +92,59 @@ namespace KYH
 
         private void Panel2_Load()
         {
-            panel2.Location = new Point(115, 0);
+            panel2.Location = new Point(115, 10);
             panel2.Size = new Size(600, 400);
+            panel2.BackColor = Color.White;
 
             Controls.Add(panel2);
 
-            tabStartProgram.Text = "시작프로그램";
-            tabStartProgram.Size = new Size(256, 214);
-            tabStartProgram.TabIndex = 0;
-            tabService.Text = "서비스관리";
-            tabService.Size = new Size(256, 214);
-            tabService.TabIndex = 1;
+            ArrayList col_list = new ArrayList();
+            ArrayList item_list = new ArrayList();
 
+            //가상 데이터----------------------------------------------------------------------------------------------------------------
+            col_list.Add(new string[] { "ㅁ", "30", "L" });
+            col_list.Add(new string[] { "중요", "50", "L" });
+            col_list.Add(new string[] { "프로그램", "150", "L" });
+            col_list.Add(new string[] { "경로", "200", "L" });
+            col_list.Add(new string[] { "위치1", "80", "L" });
+            col_list.Add(new string[] { "위치2", "80", "L" });
+
+            item_list.Add(new Items(new string[] { " ㅁ ", " - ", " AlCaptur ", "\"c#Program Files (x86)\\... ", "HKLM", "SOFT... " }));
+            item_list.Add(new Items(new string[] { " ㅁ ", " ● ", " WindowsDefen...", "\\%ProgramFiles%\\win/... ", "HKLM", "SOFT... " }));
+            
+            //----------------------------------------------------------------------------------------------------------------------------
+
+            Label lb = new Label();
             
 
+            lb.Text = "시작 프로그램이 많을 경우 컴퓨터가 느려지고 부팅 속도도 많이 느려집니다.";
+            lb.AutoSize = true;
+            lb.Location = new Point(50, 70);
+
+            ListView lv = lv_create(col_list, item_list);
+
+            Button btn1 = new Button();
+            Button btn2 = new Button();
+
+            btn1.DialogResult = DialogResult.OK;
+            btn1.Text = "비활성화";
+            btn1.Location = new Point(350, 310);
+            btn1.Size = new Size(90, 50);
+            Controls.Add(btn1);
+
+
+            btn2.DialogResult = DialogResult.OK;
+            btn2.Text = "활성화";
+            btn2.Location = new Point(360+90, 310);
+            btn2.Size = new Size(90, 50);
+            Controls.Add(btn2);
 
 
 
+            panel2.Controls.Add(lv);  //판넬2 에 lv(리스트뷰 추가)
+            panel2.Controls.Add(lb);  // 라벨 추가
+            panel2.Controls.Add(btn1);
+            panel2.Controls.Add(btn2);
         }
 
         private void Button3_Click(object o, EventArgs e)  // 삭제
@@ -211,14 +229,16 @@ namespace KYH
             ListView lv = new ListView();
 
             lv.GridLines = true;
-            lv.Location = new Point(12, 12);
+            lv.Location = new Point(50, 100);
             lv.Name = "listView1";
-            lv.Size = new Size(776, 426);
+            lv.Size = new Size(500, 200);
             lv.TabIndex = 0;
             lv.UseCompatibleStateImageBehavior = false;
             lv.View = View.Details;
 
             bool I_check = Items_create(item_list, lv);
+            bool h_check = col_create(col_list, lv);
+            
 
             return lv;
         }
@@ -231,13 +251,41 @@ namespace KYH
                 ListViewItem item = new ListViewItem(row.getCol1());
                 item.SubItems.Add(row.getCol2());
                 item.SubItems.Add(row.getCol3());
+                item.SubItems.Add(row.getCol4());
+                item.SubItems.Add(row.getCol5());
+                item.SubItems.Add(row.getCol6());
                 lv.Items.Add(item);
             }
             return true;
         }
-    }
 
-    
+        private bool col_create(ArrayList col_list, ListView lv)
+        {
+            for(int i = 0; i < col_list.Count; i++)
+            {
+                string[] arr = (string[])col_list[i]; //(string[]) 명시적 형변환
+                ColumnHeader columnHeader = new ColumnHeader();
+                columnHeader.Text = arr[0];
+                columnHeader.Width = Convert.ToInt32( arr[1]);
+                columnHeader.TextAlign = HorizontalAlignment.Center;
+                lv.Columns.Add(columnHeader);
+
+            }
+            return true;
+        }
+
+        private bool Tab_create()//탭 화면 매서드
+        {
+            tabStartProgram.Text = "시작프로그램";
+            tabStartProgram.Size = new Size(256, 214);
+            tabStartProgram.TabIndex = 0;
+            tabService.Text = "서비스관리";
+            tabService.Size = new Size(256, 214);
+            tabService.TabIndex = 1;
+
+            return true;
+        }
+    }
 
     public class Items
     {
@@ -252,9 +300,9 @@ namespace KYH
             col1 = a[0];
             col2 = a[1];
             col3 = a[2];
-            col4 = a[2];
-            col5 = a[2];
-            col6 = a[2];
+            col4 = a[3];
+            col5 = a[4];
+            col6 = a[5];
         }
 
         public string getCol1()
@@ -263,23 +311,23 @@ namespace KYH
         }
         public string getCol2()
         {
-            return col1;
+            return col2;
         }
         public string getCol3()
         {
-            return col1;
+            return col3;
         }
         public string getCol4()
         {
-            return col1;
+            return col4;
         }
         public string getCol5()
         {
-            return col1;
+            return col5;
         }
         public string getCol6()
         {
-            return col1;
+            return col6;
         }
     } //아이템
 }
