@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -41,6 +42,24 @@ namespace KYH
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ArrayList col_list = new ArrayList();
+            ArrayList item_list = new ArrayList();
+
+            col_list.Add(new string[] { "ㅁ", "30", "L" });
+            col_list.Add(new string[] { "중요", "50", "L" });
+            col_list.Add(new string[] { "프로그램", "150", "L" });
+            col_list.Add(new string[] { "경로", "200", "L" });
+            col_list.Add(new string[] { "위치1", "80", "L" });
+            col_list.Add(new string[] { "위치2", "80", "L" });
+
+            item_list.Add(new Items(new string[] { " ㅁ ", " - ", " AlCaptur ","\"c#Program Files (x86)\\... ", "HKLM", "SOFT... " }));
+            item_list.Add(new Items(new string[] { " ㅁ ", " - ", " WindowsDefen...", "\\%ProgramFiles%\\win/... ", "HKLM", "SOFT... " }));
+            item_list.Add(new Items(new string[] { " ㅁ ", " - ", " AlCaptur ", "\"c#Program Files (x86)\\... ", "HKLM", "SOFT... " }));
+            item_list.Add(new Items(new string[] { " ㅁ ", " - ", " AlCaptur ", "\"c#Program Files (x86)\\... ", "HKLM", "SOFT... " }));
+            item_list.Add(new Items(new string[] { " ㅁ ", " - ", " AlCaptur ", "\"c#Program Files (x86)\\... ", "HKLM", "SOFT... " }));
+            item_list.Add(new Items(new string[] { " ㅁ ", " - ", " AlCaptur ", "\"c#Program Files (x86)\\... ", "HKLM", "SOFT... " }));
+            
+
             Button_Load();
 
             Panel1_Load();
@@ -94,14 +113,19 @@ namespace KYH
             panel2.Location = new Point(115, 0);
             panel2.Size = new Size(600, 400);
 
+            Controls.Add(panel2);
+
             tabStartProgram.Text = "시작프로그램";
-            tabStartProgram.Size = new System.Drawing.Size(256, 214);
+            tabStartProgram.Size = new Size(256, 214);
             tabStartProgram.TabIndex = 0;
             tabService.Text = "서비스관리";
-            tabService.Size = new System.Drawing.Size(256, 214);
+            tabService.Size = new Size(256, 214);
             tabService.TabIndex = 1;
 
-            Controls.Add(panel2);
+            
+
+
+
 
         }
 
@@ -147,14 +171,14 @@ namespace KYH
         {
             button1.DialogResult = DialogResult.OK;
             button1.ImageAlign = ContentAlignment.MiddleCenter;
-            button1.Image = (Image)(new Bitmap(Image.FromFile(@"C:\Users\GD10\Source\Repos\yungjin\KYH\broom.png"), new Size(60, 60)));
+            button1.Image = (Image)(new Bitmap(Image.FromFile(@"D:\GIt\KYH\broom.png"), new Size(60, 60)));
             button1.TextAlign = ContentAlignment.BottomRight;
             button1.Text = "최적화";
             button1.Size = new Size(110, 90);
 
             button2.DialogResult = DialogResult.OK;
             button2.ImageAlign = ContentAlignment.MiddleCenter;
-            button2.Image = (Image)(new Bitmap(Image.FromFile(@"C:\Users\GD10\Source\Repos\yungjin\KYH\tools.png"), new Size(58, 58)));
+            button2.Image = (Image)(new Bitmap(Image.FromFile(@"D:\GIt\KYH\tools.png"), new Size(58, 58)));
             button2.TextAlign = ContentAlignment.BottomRight;
             button2.Text = "관리";
             button2.Size = new Size(110, 90);
@@ -162,7 +186,7 @@ namespace KYH
 
             button3.DialogResult = DialogResult.OK;
             button3.ImageAlign = ContentAlignment.MiddleCenter;
-            button3.Image = (Image)(new Bitmap(Image.FromFile(@"C:\Users\GD10\Source\Repos\yungjin\KYH\delete.png"), new Size(58, 58)));
+            button3.Image = (Image)(new Bitmap(Image.FromFile(@"D:\GIt\KYH\delete.png"), new Size(58, 58)));
             button3.TextAlign = ContentAlignment.BottomRight;
             button3.Text = "삭제";
             button3.Size = new Size(110, 90);
@@ -170,7 +194,7 @@ namespace KYH
 
             button4.DialogResult = DialogResult.OK;
             button4.ImageAlign = ContentAlignment.MiddleCenter;
-            button4.Image = (Image)(new Bitmap(Image.FromFile(@"C:\Users\GD10\Source\Repos\yungjin\KYH\research.png"), new Size(58, 58)));
+            button4.Image = (Image)(new Bitmap(Image.FromFile(@"D:\GIt\KYH\research.png"), new Size(58, 58)));
             button4.TextAlign = ContentAlignment.BottomRight;
             button4.Text = "PC상태";
             button4.Size = new Size(110, 90);
@@ -181,6 +205,81 @@ namespace KYH
             Controls.Add(button3);
             Controls.Add(button4);
         }
+
+        private ListView lv_create(ArrayList col_list, ArrayList item_list) //관리 리스트 뷰
+        {
+            ListView lv = new ListView();
+
+            lv.GridLines = true;
+            lv.Location = new Point(12, 12);
+            lv.Name = "listView1";
+            lv.Size = new Size(776, 426);
+            lv.TabIndex = 0;
+            lv.UseCompatibleStateImageBehavior = false;
+            lv.View = View.Details;
+
+            bool I_check = Items_create(item_list, lv);
+
+            return lv;
+        }
+
+        private bool Items_create(ArrayList item_list, ListView lv)
+        {
+            for (int i = 0; i < item_list.Count; i++)
+            {
+                Items row = (Items)item_list[i];
+                ListViewItem item = new ListViewItem(row.getCol1());
+                item.SubItems.Add(row.getCol2());
+                item.SubItems.Add(row.getCol3());
+                lv.Items.Add(item);
+            }
+            return true;
+        }
     }
 
+    
+
+    public class Items
+    {
+        string col1;
+        string col2;
+        string col3;
+        string col4;
+        string col5;
+        string col6;
+        public Items(string[] a)
+        {
+            col1 = a[0];
+            col2 = a[1];
+            col3 = a[2];
+            col4 = a[2];
+            col5 = a[2];
+            col6 = a[2];
+        }
+
+        public string getCol1()
+        {
+            return col1;
+        }
+        public string getCol2()
+        {
+            return col1;
+        }
+        public string getCol3()
+        {
+            return col1;
+        }
+        public string getCol4()
+        {
+            return col1;
+        }
+        public string getCol5()
+        {
+            return col1;
+        }
+        public string getCol6()
+        {
+            return col1;
+        }
+    } //아이템
 }
