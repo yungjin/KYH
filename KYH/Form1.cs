@@ -10,13 +10,17 @@ using System.Windows.Forms;
 
 namespace KYH
 {
-
     public partial class Form1 : Form
     {
         Button button1 = new Button();  // 최적화
         Panel panel1 = new Panel();
+        Button btnHard = new Button();
+        Button btnProcess = new Button();
 
         Button button2 = new Button();  // 관리
+        TabControl tabControl1 = new TabControl();
+        TabPage tabPage1 = new TabPage();
+        TabPage tabPage2 = new TabPage();
         Panel panel2 = new Panel();
 
         Button button3 = new Button();  // 삭제
@@ -25,13 +29,6 @@ namespace KYH
         Button button4 = new Button();  // PC상태
         Panel panel4 = new Panel();
 
-        Button btnHard = new Button();
-        Button btnProcess = new Button();
-
-        TabPage tabStartProgram = new TabPage();
-        TabPage tabService = new TabPage();
-
-        TabControl TabControl = new TabControl();
 
         public Form1()
         {
@@ -42,7 +39,6 @@ namespace KYH
         private void Form1_Load(object sender, EventArgs e)
         {
             Button_Load();
-
             Panel1_Load();
 
             button1.Click += Button1_Click;
@@ -53,6 +49,8 @@ namespace KYH
 
         private void Button1_Click(object o, EventArgs e)   // 최적화
         {
+            panel2.Controls.Clear();
+
             panel1.Visible = true;
             panel2.Visible = false;
             panel3.Visible = false;
@@ -81,6 +79,8 @@ namespace KYH
 
         private void Button2_Click(object o, EventArgs e) // 관리
         {
+            tabControl1.TabPages.Clear();
+
             panel1.Visible = false;
             panel2.Visible = true;
             panel3.Visible = false;
@@ -94,15 +94,27 @@ namespace KYH
             panel2.Location = new Point(115, 0);
             panel2.Size = new Size(600, 400);
 
-            tabStartProgram.Text = "시작프로그램";
-            tabStartProgram.Size = new System.Drawing.Size(256, 214);
-            tabStartProgram.TabIndex = 0;
-            tabService.Text = "서비스관리";
-            tabService.Size = new System.Drawing.Size(256, 214);
-            tabService.TabIndex = 1;
+            panel2.Controls.Add(tabControl1);
+
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(600, 400);
+            tabControl1.TabIndex = 0;
+
+            tabPage1.Location = new Point(4, 22);
+            tabPage1.Size = new Size(466, 311);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "중요";
+            tabPage1.UseVisualStyleBackColor = true;
+
+            tabPage2.Location = new Point(4, 22);
+            tabPage2.Size = new Size(192, 74);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "tabPage2";
+            tabPage2.UseVisualStyleBackColor = true;
 
             Controls.Add(panel2);
-
         }
 
         private void Button3_Click(object o, EventArgs e)  // 삭제
@@ -147,14 +159,14 @@ namespace KYH
         {
             button1.DialogResult = DialogResult.OK;
             button1.ImageAlign = ContentAlignment.MiddleCenter;
-            button1.Image = (Image)(new Bitmap(Image.FromFile(@"C:\Users\GD10\Source\Repos\yungjin\KYH\broom.png"), new Size(60, 60)));
+            button1.Image = (new Bitmap(Image.FromFile(@"C:\Users\GD10\Desktop\화면설계\broom.png"), new Size(60, 60)));
             button1.TextAlign = ContentAlignment.BottomRight;
             button1.Text = "최적화";
             button1.Size = new Size(110, 90);
 
             button2.DialogResult = DialogResult.OK;
             button2.ImageAlign = ContentAlignment.MiddleCenter;
-            button2.Image = (Image)(new Bitmap(Image.FromFile(@"C:\Users\GD10\Source\Repos\yungjin\KYH\tools.png"), new Size(58, 58)));
+            button2.Image = (new Bitmap(Image.FromFile(@"C:\Users\GD10\Desktop\화면설계\tools.png"), new Size(58, 58)));
             button2.TextAlign = ContentAlignment.BottomRight;
             button2.Text = "관리";
             button2.Size = new Size(110, 90);
@@ -162,7 +174,7 @@ namespace KYH
 
             button3.DialogResult = DialogResult.OK;
             button3.ImageAlign = ContentAlignment.MiddleCenter;
-            button3.Image = (Image)(new Bitmap(Image.FromFile(@"C:\Users\GD10\Source\Repos\yungjin\KYH\delete.png"), new Size(58, 58)));
+            button3.Image = (new Bitmap(Image.FromFile(@"C:\Users\GD10\Desktop\화면설계\delete.png"), new Size(58, 58)));
             button3.TextAlign = ContentAlignment.BottomRight;
             button3.Text = "삭제";
             button3.Size = new Size(110, 90);
@@ -170,7 +182,7 @@ namespace KYH
 
             button4.DialogResult = DialogResult.OK;
             button4.ImageAlign = ContentAlignment.MiddleCenter;
-            button4.Image = (Image)(new Bitmap(Image.FromFile(@"C:\Users\GD10\Source\Repos\yungjin\KYH\research.png"), new Size(58, 58)));
+            button4.Image = (new Bitmap(Image.FromFile(@"C:\Users\GD10\Desktop\화면설계\research.png"), new Size(58, 58)));
             button4.TextAlign = ContentAlignment.BottomRight;
             button4.Text = "PC상태";
             button4.Size = new Size(110, 90);
@@ -182,5 +194,4 @@ namespace KYH
             Controls.Add(button4);
         }
     }
-
 }
