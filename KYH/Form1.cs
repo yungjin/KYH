@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,21 +13,23 @@ namespace KYH
 {
     public partial class Form1 : Form
     {
-        Button button1 = new Button();  // 최적화
+        BtnClass btnClass = new BtnClass();
+
+        // 최적화
         Panel panel1 = new Panel();
         Button btnHard = new Button();
         Button btnProcess = new Button();
 
-        Button button2 = new Button();  // 관리
+        // 관리
         TabControl tabControl1 = new TabControl();
         TabPage tabPage1 = new TabPage();
         TabPage tabPage2 = new TabPage();
         Panel panel2 = new Panel();
 
-        Button button3 = new Button();  // 삭제
+        // 삭제
         Panel panel3 = new Panel();
 
-        Button button4 = new Button();  // PC상태
+        // PC상태
         Panel panel4 = new Panel();
 
 
@@ -40,11 +43,6 @@ namespace KYH
         {
             Button_Load();
             Panel1_Load();
-
-            button1.Click += Button1_Click;
-            button2.Click += Button2_Click;
-            button3.Click += Button3_Click;
-            button4.Click += Button4_Click;
         }
 
         private void Button1_Click(object o, EventArgs e)   // 최적화
@@ -157,41 +155,17 @@ namespace KYH
 
         private void Button_Load()
         {
-            button1.DialogResult = DialogResult.OK;
-            button1.ImageAlign = ContentAlignment.MiddleCenter;
-            button1.Image = (new Bitmap(Image.FromFile(@"C:\Users\GD10\Desktop\화면설계\broom.png"), new Size(60, 60)));
-            button1.TextAlign = ContentAlignment.BottomRight;
-            button1.Text = "최적화";
-            button1.Size = new Size(110, 90);
+            ArrayList arrayList = new ArrayList();
 
-            button2.DialogResult = DialogResult.OK;
-            button2.ImageAlign = ContentAlignment.MiddleCenter;
-            button2.Image = (new Bitmap(Image.FromFile(@"C:\Users\GD10\Desktop\화면설계\tools.png"), new Size(58, 58)));
-            button2.TextAlign = ContentAlignment.BottomRight;
-            button2.Text = "관리";
-            button2.Size = new Size(110, 90);
-            button2.Location = new Point(0, 90);
+            arrayList.Add(new BtnSet(this, "최적화", 110, 90, 0, 0, @"C:\Users\GD10\Desktop\화면설계\broom.png", Button1_Click));
+            arrayList.Add(new BtnSet(this, "관리", 110, 90, 0, 90, @"C:\Users\GD10\Desktop\화면설계\tools.png", Button2_Click));
+            arrayList.Add(new BtnSet(this, "삭제", 110, 90, 0, 180, @"C:\Users\GD10\Desktop\화면설계\delete.png", Button3_Click));
+            arrayList.Add(new BtnSet(this, "PC상태", 110, 90, 0, 270, @"C:\Users\GD10\Desktop\화면설계\research.png", Button4_Click));
 
-            button3.DialogResult = DialogResult.OK;
-            button3.ImageAlign = ContentAlignment.MiddleCenter;
-            button3.Image = (new Bitmap(Image.FromFile(@"C:\Users\GD10\Desktop\화면설계\delete.png"), new Size(58, 58)));
-            button3.TextAlign = ContentAlignment.BottomRight;
-            button3.Text = "삭제";
-            button3.Size = new Size(110, 90);
-            button3.Location = new Point(0, 180);
-
-            button4.DialogResult = DialogResult.OK;
-            button4.ImageAlign = ContentAlignment.MiddleCenter;
-            button4.Image = (new Bitmap(Image.FromFile(@"C:\Users\GD10\Desktop\화면설계\research.png"), new Size(58, 58)));
-            button4.TextAlign = ContentAlignment.BottomRight;
-            button4.Text = "PC상태";
-            button4.Size = new Size(110, 90);
-            button4.Location = new Point(0, 270);
-
-            Controls.Add(button1);
-            Controls.Add(button2);
-            Controls.Add(button3);
-            Controls.Add(button4);
+            for (int i = 0; i < arrayList.Count; i++)
+            {
+                btnClass.button((BtnSet)arrayList[i]);
+            }
         }
     }
 }

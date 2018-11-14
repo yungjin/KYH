@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace KYH
+{
+    class BtnClass
+    {
+        public void button(BtnSet btnSet)
+        {
+            Button button = new Button();
+            button.DialogResult = DialogResult.OK;
+            button.Text = btnSet.Text;
+            button.Size = new Size(btnSet.SizeX, btnSet.SizeY);
+            button.Location = new Point(btnSet.PointX, btnSet.PointY);
+            button.Image = (new Bitmap(Image.FromFile(btnSet.ImageRoute), new Size(58, 58)));
+            button.TextAlign = ContentAlignment.BottomRight;
+            button.Click += btnSet.eventHandler;
+            btnSet.Form.Controls.Add(button);
+        }
+    }
+}
