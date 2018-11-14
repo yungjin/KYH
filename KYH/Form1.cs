@@ -21,9 +21,6 @@ namespace KYH
         Button btnProcess = new Button();
 
         // 관리
-        TabControl tabControl1 = new TabControl();
-        TabPage tabPage1 = new TabPage();
-        TabPage tabPage2 = new TabPage();
         Panel panel2 = new Panel();
 
         // 삭제
@@ -31,7 +28,6 @@ namespace KYH
 
         // PC상태
         Panel panel4 = new Panel();
-
 
         public Form1()
         {
@@ -41,14 +37,28 @@ namespace KYH
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.IsMdiContainer = true;
+            this.BackColor = Color.WhiteSmoke;
+
+            //https://support.microsoft.com/ko-kr/help/319465/how-to-change-the-background-color-for-an-mdi-parent-form-in-visual-c
+            MdiClient mdiClient;
+            foreach (Control control in this.Controls)
+            {
+                try
+                {
+                    mdiClient = (MdiClient)control;
+
+                    mdiClient.BackColor = this.BackColor;
+                }
+                catch (InvalidCastException) { }
+            }
+
             Button_Load();
             Panel1_Load();
         }
 
         private void Button1_Click(object o, EventArgs e)   // 최적화
         {
-            panel2.Controls.Clear();
-
             panel1.Visible = true;
             panel2.Visible = false;
             panel3.Visible = false;
@@ -59,26 +69,19 @@ namespace KYH
 
         private void Panel1_Load()
         {
-            panel1.Location = new Point(115, 0);
-            panel1.Size = new Size(600, 400);
+            Form2 form2 = new Form2();
+            form2.MdiParent = this;
+
+            panel1.Location = new Point(111, 3);
+            panel1.Size = new Size(650, 400);
+
             Controls.Add(panel1);
-
-            btnHard.Text = "하드디스크 최적화";
-            btnHard.Size = new Size(200, 80);
-            btnHard.Location = new Point(95, 80);
-
-            btnProcess.Text = "프로세스 최적화";
-            btnProcess.Size = new Size(200, 80);
-            btnProcess.Location = new Point(95, 170);
-
-            panel1.Controls.Add(btnHard);
-            panel1.Controls.Add(btnProcess);
+            panel1.Controls.Add(form2);
+            form2.Show();
         }
 
         private void Button2_Click(object o, EventArgs e) // 관리
         {
-            tabControl1.TabPages.Clear();
-
             panel1.Visible = false;
             panel2.Visible = true;
             panel3.Visible = false;
@@ -89,30 +92,15 @@ namespace KYH
 
         private void Panel2_Load()
         {
-            panel2.Location = new Point(115, 0);
-            panel2.Size = new Size(600, 400);
+            Form2 form2 = new Form2();
+            form2.MdiParent = this;
 
-            panel2.Controls.Add(tabControl1);
-
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(600, 400);
-            tabControl1.TabIndex = 0;
-
-            tabPage1.Location = new Point(4, 22);
-            tabPage1.Size = new Size(466, 311);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "중요";
-            tabPage1.UseVisualStyleBackColor = true;
-
-            tabPage2.Location = new Point(4, 22);
-            tabPage2.Size = new Size(192, 74);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
-            tabPage2.UseVisualStyleBackColor = true;
+            panel2.Location = new Point(111, 3);
+            panel2.Size = new Size(650, 400);
 
             Controls.Add(panel2);
+            panel2.Controls.Add(form2);
+            form2.Show();
         }
 
         private void Button3_Click(object o, EventArgs e)  // 삭제
@@ -127,11 +115,15 @@ namespace KYH
 
         private void Panel3_Load()
         {
-            panel3.Location = new Point(115, 0);
-            panel3.Size = new Size(600, 400);
-            panel3.BackColor = Color.Aqua;
+            Form2 form2 = new Form2();
+            form2.MdiParent = this;
+
+            panel3.Location = new Point(111, 3);
+            panel3.Size = new Size(650, 400);
 
             Controls.Add(panel3);
+            panel3.Controls.Add(form2);
+            form2.Show();
         }
 
         private void Button4_Click(object o, EventArgs e)  // PC상태
@@ -146,22 +138,26 @@ namespace KYH
 
         private void Panel4_Load()
         {
-            panel4.Location = new Point(115, 0);
-            panel4.Size = new Size(600, 400);
-            panel4.BackColor = Color.Crimson;
+            Form2 form2 = new Form2();
+            form2.MdiParent = this;
+
+            panel4.Location = new Point(111, 3);
+            panel4.Size = new Size(650, 400);
 
             Controls.Add(panel4);
+            panel4.Controls.Add(form2);
+            form2.Show();
         }
 
         private void Button_Load()
         {
             ArrayList arrayList = new ArrayList();
 
-            arrayList.Add(new BtnSet(this, "최적화", 110, 90, 0, 0, @"C:\Users\GD10\Desktop\화면설계\broom.png", Button1_Click));
-            arrayList.Add(new BtnSet(this, "관리", 110, 90, 0, 90, @"C:\Users\GD10\Desktop\화면설계\tools.png", Button2_Click));
-            arrayList.Add(new BtnSet(this, "삭제", 110, 90, 0, 180, @"C:\Users\GD10\Desktop\화면설계\delete.png", Button3_Click));
-            arrayList.Add(new BtnSet(this, "PC상태", 110, 90, 0, 270, @"C:\Users\GD10\Desktop\화면설계\research.png", Button4_Click));
-
+            arrayList.Add(new BtnSet(this, "", 110, 90, 0, 0, "image1", Button1_Click));
+            arrayList.Add(new BtnSet(this, "", 110, 90, 0, 90, "image2", Button2_Click));
+            arrayList.Add(new BtnSet(this, "", 110, 90, 0, 180, "image3", Button3_Click));
+            arrayList.Add(new BtnSet(this, "", 110, 90, 0, 270, "image4", Button4_Click));
+            
             for (int i = 0; i < arrayList.Count; i++)
             {
                 btnClass.button((BtnSet)arrayList[i]);
