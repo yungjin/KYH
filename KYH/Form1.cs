@@ -20,6 +20,12 @@ namespace KYH
         private ListView listView1;
         private ListView listView2;
         private CheckBox checkBox1;
+        private Button btn1;
+        private Button btn2;
+        private Button btn3;
+        private Label lb1;
+        private Label lb2;
+        private Label lb3;
 
         Button button1 = new Button();  // 최적화
         Panel panel1 = new Panel();
@@ -40,8 +46,7 @@ namespace KYH
         TabPage tabService = new TabPage();
 
         TabControl TabControl = new TabControl();
-
-        Button btn = new Button();  //삭제버튼
+        
 
 
         public Form1()
@@ -174,8 +179,7 @@ namespace KYH
         {
             panel3.Location = new Point(115, 0);
             panel3.Size = new Size(600, 400);
-            panel3.BackColor = Color.Aqua;
-
+          
             tabControl1 = MyTabs();
             Controls.Add(panel3);
         }
@@ -203,15 +207,56 @@ namespace KYH
             tabPage2.Text = "개인정보 삭제";
             tabPage3.Text = "파일 강제삭제";
 
+            btn1 = new Button();
+            btn1.Text = "삭제";
+            btn1.Size = new Size(80,30);
+            btn1.Location = new Point(250,300);
+            btn1.Click += btn1_Click;
+
+            btn2 = new Button();
+            btn2.Text = "삭제";
+            btn2.Size = new Size(80, 30);
+            btn2.Location = new Point(250, 300);
+
+            btn3 = new Button();
+            btn3.Text = "삭제";
+            btn3.Size = new Size(80, 30);
+            btn3.Location = new Point(250, 300);
+
+            lb1 = new Label();
+            lb1.Text = "내 PC에 설치된 프로그램을 관리합니다.";
+            lb1.Size = new Size(224,20);
+            lb1.Location = new Point(45,15);
+
+            lb2 = new Label();
+            lb2.Text = "컴퓨터나 인터넷 사용에 따른 사용기록과 목록을 삭제합니다.";
+            lb2.Size = new Size(400, 20);
+            lb2.Location = new Point(45, 15);
+
+            lb3 = new Label();
+            lb3.Text = "현재 사용중의 이유로 액세스 거부가 되어 삭제되지 않는 파일을 강제로 삭제합니다.";
+            lb3.Size = new Size(500, 20);
+            lb3.Location = new Point(45, 15);
+
             listView1 = ListPrint();
             checkBox1 = UserDelete();
             listView2 = LIstPrint2();
+            tabPage1.Controls.Add(lb1);
+            tabPage2.Controls.Add(lb2);
+            tabPage3.Controls.Add(lb3);
+            tabPage1.Controls.Add(btn1);
+            tabPage2.Controls.Add(btn2);
+            tabPage3.Controls.Add(btn3);
             tabPage1.Controls.Add(listView1);
             tabPage2.Controls.Add(checkBox1);
             tabPage3.Controls.Add(listView2);
             panel3.Controls.AddRange(new Control[] { tabControl1 });
             return tabControl1;
         }   
+        private void btn1_Click(object sender, EventArgs args)
+        {
+            MessageBox.Show("삭제완료");
+        }
         private ListView ListPrint()
         {
             listView1 = new ListView();
@@ -242,8 +287,7 @@ namespace KYH
             item3.SubItems.Add("FileZilla Client 3.37.0");
             item3.SubItems.Add("Tim kosse");
             item3.SubItems.Add("2018.10.23");
-
-
+            
             listView1.Items.AddRange(new ListViewItem[] { item1, item2, item3 });
 
             return listView1;
