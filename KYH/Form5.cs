@@ -64,7 +64,7 @@ namespace KYH
             Label1.Text = "?";
             Label1.Cursor = Cursors.Help;
             Label1.Font = new Font("고딕", 10, FontStyle.Bold);
-            Label1.Location = new Point(195, 103);
+            Label1.Location = new Point(195, 102);
             toolTip1.IsBalloon = true;
             toolTip1.SetToolTip(Label1, "0  ~ 50도 : 적정온도 \n51 ~ 60도 : 약간 높은 상태\n60도 이상 : 위험한 상태로 백업 요망");
             Controls.Add(Label1);
@@ -75,7 +75,7 @@ namespace KYH
             Label2.Text = "?";
             Label2.Cursor = Cursors.Help;
             Label2.Font = new Font("고딕", 10, FontStyle.Bold);
-            Label2.Location = new Point(285, 213);
+            Label2.Location = new Point(285, 212);
             toolTip2.IsBalloon = true;
             toolTip2.SetToolTip(Label2, "하드디스크의 평균 수명은 약 25만 시간");
             Controls.Add(Label2);
@@ -86,7 +86,7 @@ namespace KYH
             Label3.Text = "?";
             Label3.Cursor = Cursors.Help;
             Label3.Font = new Font("고딕", 10, FontStyle.Bold);
-            Label3.Location = new Point(348, 324);
+            Label3.Location = new Point(347, 321);
             toolTip3.IsBalloon = true;
             toolTip3.ShowAlways = true;
             toolTip3.SetToolTip(Label3, "컴퓨터에 파워 들어온 횟수");
@@ -97,12 +97,24 @@ namespace KYH
             Label4.AutoSize = true;
             Label4.Text = "?";
             Label4.Cursor = Cursors.Help;
-            Label4.Font = new Font("고딕", 13, FontStyle.Bold);
-            Label4.Location = new Point(592, 43);
+            Label4.Font = new Font("고딕", 10, FontStyle.Bold);
+            Label4.Location = new Point(545, 101);
             toolTip4.IsBalloon = true;
             toolTip4.ShowAlways = true;
             toolTip4.SetToolTip(Label4, "0  ~ 55도 : 적정온도 \n56 ~ 65도 : 약간 높은 상태\n66 ~ 80 : 높은상태");
             Controls.Add(Label4);
+
+            Label Label5 = new Label();
+            ToolTip toolTip5 = new ToolTip();
+            Label5.AutoSize = true;
+            Label5.Text = "?";
+            Label5.Cursor = Cursors.Help;
+            Label5.Font = new Font("고딕", 10, FontStyle.Bold);
+            Label5.Location = new Point(545, 292);
+            toolTip5.IsBalloon = true;
+            toolTip5.ShowAlways = true;
+            toolTip5.SetToolTip(Label5, "0  ~ 55도 : 적정온도 \n56 ~ 65도 : 약간 높은 상태\n66 ~ 80 : 높은상태");
+            Controls.Add(Label5);
         }
 
         private void Picturebox_Load()
