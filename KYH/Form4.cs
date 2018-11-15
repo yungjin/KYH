@@ -37,11 +37,16 @@ namespace KYH
             tabControl1.Padding = new Point(22, 20);
             tabControl1.Controls.AddRange(new Control[] { tabPage1, tabPage2, tabPage3 });
             tabControl1.Size = new Size(600, 500);
+            
 
             tabPage1.Text = "프로그램 삭제";
             tabPage2.Text = "개인정보 삭제";
             tabPage3.Text = "파일 강제삭제";
 
+            tabPage1.BackColor = Color.WhiteSmoke;
+            tabPage2.BackColor = Color.WhiteSmoke;
+            tabPage3.BackColor = Color.WhiteSmoke;
+            
             Modulecs mc = new Modulecs();
             ArrayList arr = new ArrayList();
 
