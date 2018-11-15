@@ -23,20 +23,27 @@ namespace KYH
             BackColor = Color.WhiteSmoke;
             Load += FormY_Load;
         }
+        string[] Activ = { "활성", "비활성" };
+        int num = 0;
+
+        ArrayList col_list = new ArrayList();
+        ArrayList item_list = new ArrayList();
+        ArrayList col2_list = new ArrayList();
+        ArrayList item2_list = new ArrayList();
+
 
         private void FormY_Load(object sender, EventArgs e)
         {
-            ArrayList col_list = new ArrayList();
-            ArrayList item_list = new ArrayList();
-            ArrayList col2_list = new ArrayList();
-            ArrayList item2_list = new ArrayList();
+            
 
             TabControl tabControl1 = new TabControl();
             TabPage tabPage1 = new TabPage();
             TabPage tabPage2 = new TabPage();
 
-            string[] Activ = { "활성", "비활성" };
-
+           
+            
+            
+            
             //가상 데이터1----------------------------------------------------------------------------------------------------------------
             col_list.Add(new string[] { " ", "30" });
             col_list.Add(new string[] { "중요", "50" });
@@ -46,9 +53,9 @@ namespace KYH
             col_list.Add(new string[] { "위치1", "80" });
             col_list.Add(new string[] { "위치2", "80" });
 
-            item_list.Add(new Items(new string[] { " ", "-", "비활성", " AlCaptur ", "\"c#Program Files (x86)\\... ", "HKLM", "SOFT... " }));
-            item_list.Add(new Items(new string[] { " ", "●", "활성", " WindowsDefen...", "\\%ProgramFiles%\\win/... ", "HKLM", "SOFT... " }));
-            item_list.Add(new Items(new string[] { " ", "-", "활성", " GooDee", "\\%ProgramFiles%\\win/... ", "HKLM", "SOFT... " }));
+            item_list.Add(new Items(new string[] { " ", "-", "비활성화", " AlCaptur ", "\"c#Program Files (x86)\\... ", "HKLM", "SOFT... " }));
+            item_list.Add(new Items(new string[] { " ", "●", "활성화", " WindowsDefen...", "\\%ProgramFiles%\\win/... ", "HKLM", "SOFT... " }));
+            item_list.Add(new Items(new string[] { " ", "-", "활성화", " GooDee", "\\%ProgramFiles%\\win/... ", "HKLM", "SOFT... " }));
 
             //----------------------------------------------------------------------------------------------------------------------------
 
@@ -66,42 +73,41 @@ namespace KYH
             item2_list.Add(new Items2(new string[] { " ", "실행", " GooDee", "구디 아카데미", "", "Good" }));
 
             //----------------------------------------------------------------------------------------------------------------------------
+
             ListView lv = lv_create(col_list, item_list);
             ListView lv2 = lv2_create(col2_list, item2_list);
 
-            //Col_Y Col = new Col_Y(col_list, item_list);      //헤더 아이템 크리에이터1
-            //Col_Y Col2 = new Col_Y(col2_list, item2_list);  //헤더 아이템 크리에이터2
-            //ClassY Cy = new ClassY(col_list, item_list);
+            ClassY Cy;
+            Cy = new ClassY(lv,lv2,num);
 
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.SelectedIndex = 0;
             tabControl1.Padding = new Point(22, 20);
-            tabControl1.Size = new Size(600, 400);
+            tabControl1.Size = new Size(600, 500);
             tabControl1.TabIndex = 0;
 
             tabPage1.Location = new Point(4, 22);
             tabPage1.Size = new Size(466, 311);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "시작 프로그램";
-            tabPage1.UseVisualStyleBackColor = false;
+            tabPage1.BackColor = Color.WhiteSmoke;
 
             tabPage2.Location = new Point(4, 22);
             tabPage2.Size = new Size(192, 74);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "서비스 관리";
-            //tabPage2.BackColor = Color.WhiteSmoke;
-            tabPage2.UseVisualStyleBackColor = false;
+            tabPage2.BackColor = Color.WhiteSmoke;
 
             //버튼/라벨 모듈--------------------------------------------------------------------------------------------------------------
-            
+
             Modulecs mc = new Modulecs();
             ArrayList arr = new ArrayList();
 
-            arr.Add(new tabbtn(tabPage1, "btn_1", "비활성화", 90, 50, 350, 280));
-            arr.Add(new tabbtn(tabPage1, "btn_1", "활성화", 90, 50, 370 + 90, 280));
-            arr.Add(new tabbtn(tabPage2, "btn_1", "중지", 90, 50, 350, 280));
-            arr.Add(new tabbtn(tabPage2, "btn_1", "실행", 90, 50, 370 + 90, 280));
+            arr.Add(new tabbtn(tabPage1, "btn_1", "비활성화", 90, 50, 350, 280, Cy.Btn_Click));
+            arr.Add(new tabbtn(tabPage1, "btn_1", "활성화", 90, 50, 370 + 90, 280, Cy.Btn2_Click));
+            arr.Add(new tabbtn(tabPage2, "btn_1", "중지", 90, 50, 350, 280, Cy.Btn3_Click));
+            arr.Add(new tabbtn(tabPage2, "btn_1", "실행", 90, 50, 370 + 90, 280, Cy.Btn4_Click));
 
             arr.Add(new tablb(tabPage1, "lb", "시작 프로그램이 많을 경우 컴퓨터가 느려지고 부팅 속도도 많이 느려집니다.", 500, 20, 50, 40));
             arr.Add(new tablb(tabPage2, "lb", "서비스 프로그램을 시작 / 중지 시키는 기능입니다.", 400, 20, 50, 20));
@@ -127,6 +133,9 @@ namespace KYH
 
 
         }
+
+        
+
         public ListView lv_create(ArrayList col_list, ArrayList item_list) //관리 리스트 뷰
         {
 
@@ -151,7 +160,6 @@ namespace KYH
 
             return lv;
         }
-       
 
         public ListView lv2_create(ArrayList col2_list, ArrayList item2_list) //관리 리스트 뷰
         {

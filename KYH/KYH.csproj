@@ -49,6 +49,7 @@
     <Compile Include="BtnClass.cs" />
     <Compile Include="BtnSet.cs" />
     <Compile Include="cbtab.cs" />
+    <Compile Include="ClassY.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
