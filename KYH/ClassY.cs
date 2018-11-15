@@ -12,7 +12,8 @@ namespace KYH
         ListView lv;
         ListView lv2;
         int num;
-
+        ListView list1;
+        ListView list2;
 
 
         public ClassY(ListView lv, ListView lv2, int num)
@@ -21,7 +22,12 @@ namespace KYH
             this.num = num;
             this.lv2 = lv2;
         }
-
+        public ClassY(ListView list1, ListView list2)
+        {
+            this.list1 = list1;
+            this.list2 = list2;
+            
+        }
         public void Btn_Click(object sender, EventArgs e)
         {
             foreach (ListViewItem listitem in lv.Items)
@@ -85,6 +91,41 @@ namespace KYH
                         if (lv2.Items[i].Checked == true)
                         {
                             lv2.Items[i].SubItems[1].Text = "실행";
+                        }
+                    }
+                }
+            }
+        }
+
+        public void Btn_Click2(object sender, EventArgs e)
+        {
+            foreach (ListViewItem listitem in list1.Items)
+            {
+                if (list1.Items.Count > 0)
+                {
+                    for (int i = list1.Items.Count - 1; i >= 0; i--)
+
+                    {
+                        if (list1.Items[i].Checked == true)
+                        {
+                            list1.Items[i].Remove();
+                        }
+                    }
+                }
+            }
+        }
+        public void Btn_Click3(object sender, EventArgs e)
+        {
+            foreach (ListViewItem listitem in list2.Items)
+            {
+                if (list2.Items.Count > 0)
+                {
+                    for (int i = list2.Items.Count - 1; i >= 0; i--)
+
+                    {
+                        if (list2.Items[i].Checked == true)
+                        {
+                            list2.Items[i].Remove();
                         }
                     }
                 }

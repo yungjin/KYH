@@ -55,10 +55,14 @@ namespace KYH
             Modulecs mc = new Modulecs();
             ArrayList arr = new ArrayList();
 
+
+            ClassY cY = new ClassY(listView1, listView2);
+            
+
             //탭페이지 안에 버튼 생성
-            arr.Add(new tabbtn(tabPage1, "btn_1", "삭제", 80, 30, 250, 300,btn1_Click));
+            arr.Add(new tabbtn(tabPage1, "btn_1", "삭제", 80, 30, 250, 300,cY.Btn_Click2));
             arr.Add(new tabbtn(tabPage2, "btn_2", "삭제", 80, 30, 250, 300, btn1_Click));
-            arr.Add(new tabbtn(tabPage3, "btn_3", "삭제", 80, 30, 250, 300, btn1_Click));
+            arr.Add(new tabbtn(tabPage3, "btn_3", "삭제", 80, 30, 250, 300,cY.Btn_Click3));
 
             //탭페이지 안에 라벨 생성
             arr.Add(new tablb(tabPage1, "lb", "내 PC에 설치된 프로그램을 관리합니다.", 224, 20, 45, 20));
@@ -76,6 +80,7 @@ namespace KYH
             arr.Add(new cbtab(tabPage2, "7", "자동완성 목록 삭제", 80, 60, 300, 180));
             arr.Add(new cbtab(tabPage2, "8", "휴지통 비우기", 80, 60, 300, 230));
 
+            
 
             for (int i = 0; i < arr.Count; i++)
             {
