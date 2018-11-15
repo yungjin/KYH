@@ -16,6 +16,11 @@ namespace KYH
         public FormY()
         {
             InitializeComponent();
+
+            WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.None;
+
+            BackColor = Color.WhiteSmoke;
             Load += FormY_Load;
         }
 
