@@ -14,6 +14,7 @@ namespace KYH
     {
         Button btnHard = new Button();
         Button btnProcess = new Button();
+
         public Form2()
         {
             InitializeComponent();

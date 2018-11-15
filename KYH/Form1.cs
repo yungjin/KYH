@@ -15,21 +15,12 @@ namespace KYH
     {
         BtnClass btnClass = new BtnClass();
 
-        // 최적화
-        Panel panel1 = new Panel();
-        Button btnHard = new Button();
-        Button btnProcess = new Button();
+        Panel panel1 = new Panel(); // 최적화
+        Panel panel2 = new Panel(); // 관리
+        Panel panel3 = new Panel(); // 삭제
+        Panel panel4 = new Panel(); // PC상태
 
-        // 관리
-        Panel panel2 = new Panel();
-
-        // 삭제
-        Panel panel3 = new Panel();
-
-        // PC상태
-        Panel panel4 = new Panel();
-
-        public Form1()
+        public Form1()  // mdi
         {
             InitializeComponent();
             Load += Form1_Load;
@@ -54,6 +45,7 @@ namespace KYH
             }
 
             Button_Load();
+            Logo_Load();
             Panel1_Load();
         }
 
@@ -138,30 +130,42 @@ namespace KYH
 
         private void Panel4_Load()
         {
-            Form2 form2 = new Form2();
-            form2.MdiParent = this;
+            Form5 form5 = new Form5();
+            form5.MdiParent = this;
 
             panel4.Location = new Point(111, 3);
             panel4.Size = new Size(650, 400);
 
             Controls.Add(panel4);
-            panel4.Controls.Add(form2);
-            form2.Show();
+            panel4.Controls.Add(form5);
+            form5.Show();
         }
 
         private void Button_Load()
         {
             ArrayList arrayList = new ArrayList();
 
-            arrayList.Add(new BtnSet(this, "", 110, 90, 0, 0, "image1", Button1_Click));
-            arrayList.Add(new BtnSet(this, "", 110, 90, 0, 90, "image2", Button2_Click));
-            arrayList.Add(new BtnSet(this, "", 110, 90, 0, 180, "image3", Button3_Click));
-            arrayList.Add(new BtnSet(this, "", 110, 90, 0, 270, "image4", Button4_Click));
-            
+            arrayList.Add(new BtnSet(this, 110, 90, 0, 0, "image1", Button1_Click));
+            arrayList.Add(new BtnSet(this, 110, 90, 0, 90, "image2", Button2_Click));
+            arrayList.Add(new BtnSet(this, 110, 90, 0, 180, "image3", Button3_Click));
+            arrayList.Add(new BtnSet(this, 110, 90, 0, 270, "image4", Button4_Click));
+
             for (int i = 0; i < arrayList.Count; i++)
             {
                 btnClass.button((BtnSet)arrayList[i]);
             }
+
+        }
+
+        private void Logo_Load()
+        {
+            PictureBox pictureBox = new PictureBox();
+
+            pictureBox.Image = (Bitmap)KYH.Properties.Resources.ResourceManager.GetObject("logo1");
+            pictureBox.Location = new Point(0, 360);
+            pictureBox.Size = new Size(250, 300);
+
+            Controls.Add(pictureBox);
         }
     }
 }

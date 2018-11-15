@@ -10,7 +10,6 @@ namespace KYH
     class BtnSet
     {
         Form form;
-        string text;
         int sizeX;
         int sizeY;
         int pointX;
@@ -19,10 +18,9 @@ namespace KYH
 
         public EventHandler eventHandler;
 
-        public BtnSet(Form form, string text, int sizeX, int sizeY, int pointX, int pointY, string imageRoute, EventHandler eventHandler)
+        public BtnSet(Form form, int sizeX, int sizeY, int pointX, int pointY, string imageRoute, EventHandler eventHandler)
         {
             this.form = form;
-            this.text = text;
             this.sizeX = sizeX;
             this.sizeY = sizeY;
             this.pointX = pointX;
@@ -35,13 +33,6 @@ namespace KYH
             get
             {
                 return form;
-            }
-        }
-        public string Text
-        {
-            get
-            {
-                return text;
             }
         }
         public int SizeX
