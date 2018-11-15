@@ -30,6 +30,8 @@ namespace KYH
             TabPage tabPage1 = new TabPage();
             TabPage tabPage2 = new TabPage();
 
+            string[] Activ = { "활성", "비활성" };
+
             //가상 데이터1----------------------------------------------------------------------------------------------------------------
             col_list.Add(new string[] { " ", "30" });
             col_list.Add(new string[] { "중요", "50" });
@@ -44,6 +46,8 @@ namespace KYH
             item_list.Add(new Items(new string[] { " ", "-", "활성", " GooDee", "\\%ProgramFiles%\\win/... ", "HKLM", "SOFT... " }));
 
             //----------------------------------------------------------------------------------------------------------------------------
+
+
             //가상 데이터2----------------------------------------------------------------------------------------------------------------
             col2_list.Add(new string[] { " ", "30", "L" });
             col2_list.Add(new string[] { "상태", "70", "L" });
@@ -71,75 +75,44 @@ namespace KYH
             tabControl1.Size = new Size(600, 400);
             tabControl1.TabIndex = 0;
 
-
             tabPage1.Location = new Point(4, 22);
             tabPage1.Size = new Size(466, 311);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "시작 프로그램";
-            tabPage1.UseVisualStyleBackColor = true;
+            tabPage1.UseVisualStyleBackColor = false;
 
             tabPage2.Location = new Point(4, 22);
             tabPage2.Size = new Size(192, 74);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "서비스 관리";
-            tabPage2.UseVisualStyleBackColor = true;
+            //tabPage2.BackColor = Color.WhiteSmoke;
+            tabPage2.UseVisualStyleBackColor = false;
 
-            //라벨------------------------------------------------------------------------------------------------------------------------
+            //버튼/라벨 모듈--------------------------------------------------------------------------------------------------------------
+            
+            Modulecs mc = new Modulecs();
+            ArrayList arr = new ArrayList();
 
-            Label lb = new Label();
-            lb.Text = "시작 프로그램이 많을 경우 컴퓨터가 느려지고 부팅 속도도 많이 느려집니다.";
-            lb.AutoSize = true;
-            lb.Location = new Point(50, 40);
+            arr.Add(new tabbtn(tabPage1, "btn_1", "비활성화", 90, 50, 350, 280));
+            arr.Add(new tabbtn(tabPage1, "btn_1", "활성화", 90, 50, 370 + 90, 280));
+            arr.Add(new tabbtn(tabPage2, "btn_1", "중지", 90, 50, 350, 280));
+            arr.Add(new tabbtn(tabPage2, "btn_1", "실행", 90, 50, 370 + 90, 280));
 
-            Label lb2 = new Label();
-            lb2.Text = "서비스 프로그램을 시작/중지 시키는 기능입니다.";
-            lb2.AutoSize = true;
-            lb2.Location = new Point(50, 20);
+            arr.Add(new tablb(tabPage1, "lb", "시작 프로그램이 많을 경우 컴퓨터가 느려지고 부팅 속도도 많이 느려집니다.", 500, 20, 50, 40));
+            arr.Add(new tablb(tabPage2, "lb", "서비스 프로그램을 시작 / 중지 시키는 기능입니다.", 400, 20, 50, 20));
+            arr.Add(new tablb(tabPage2, "lb", "부팅을 빠르게 하고, 인터넷이 느릴때 도움되는 기능입니다.", 500, 20, 50, 40));
 
-            Label lb2a = new Label();
-            lb2a.Text = "부팅을 빠르게 하고, 인터넷이 느릴때 도움되는 기능입니다.";
-            lb2a.AutoSize = true;
-            lb2a.Location = new Point(50, 40);
-
-            tabPage1.Controls.Add(lb);  // 라벨 추가
-            tabPage2.Controls.Add(lb2);  // 라벨 추가
-            tabPage2.Controls.Add(lb2a);  // 라벨 추가
-            //----------------------------------------------------------------------------------------------------------------------------
-            //버튼------------------------------------------------------------------------------------------------------------------------
-            Button btn1 = new Button();
-            Button btn2 = new Button();
-
-            btn1.DialogResult = DialogResult.OK;
-            btn1.Text = "비활성화";
-            btn1.Location = new Point(350, 280);
-            btn1.Size = new Size(90, 50);
-            Controls.Add(btn1);
-
-            btn2.DialogResult = DialogResult.OK;
-            btn2.Text = "활성화";
-            btn2.Location = new Point(360 + 90, 280);
-            btn2.Size = new Size(90, 50);
-            Controls.Add(btn2);
-
-            Button btn1a = new Button();
-            Button btn2a = new Button();
-
-            btn1a.DialogResult = DialogResult.OK;
-            btn1a.Text = "중지";
-            btn1a.Location = new Point(350, 280);
-            btn1a.Size = new Size(90, 50);
-            Controls.Add(btn1a);
-
-            btn2a.DialogResult = DialogResult.OK;
-            btn2a.Text = "실행";
-            btn2a.Location = new Point(360 + 90, 280);
-            btn2a.Size = new Size(90, 50);
-            Controls.Add(btn2a);
-
-            tabPage1.Controls.Add(btn1);// 버튼1 추가
-            tabPage1.Controls.Add(btn2);// 버튼2 추가
-            tabPage2.Controls.Add(btn1a);// 버튼1 추가
-            tabPage2.Controls.Add(btn2a);// 버튼2 추가
+            for (int i = 0; i < arr.Count; i++)
+            {
+                if (typeof(tabbtn) == arr[i].GetType())  //arr[i] 객체가 btn의 객체이면 (type을 비교)
+                {
+                    mc.btn((tabbtn)arr[i]);
+                }
+                else if (typeof(tablb) == arr[i].GetType()) //arr[i] 객체가 lb (type 비교)
+                {
+                    mc.lb((tablb)arr[i]);
+                }
+            }
             //----------------------------------------------------------------------------------------------------------------------------
 
             tabPage1.Controls.Add(lv);
@@ -173,6 +146,7 @@ namespace KYH
 
             return lv;
         }
+       
 
         public ListView lv2_create(ArrayList col2_list, ArrayList item2_list) //관리 리스트 뷰
         {
@@ -261,101 +235,103 @@ namespace KYH
             }
             return true;
         }
+
+
+        public class Items
+        {
+            string col1;
+            string col2;
+            string col3;
+            string col4;
+            string col5;
+            string col6;
+            string col7;
+            public Items(string[] a)
+            {
+                col1 = a[0];
+                col2 = a[1];
+                col3 = a[2];
+                col4 = a[3];
+                col5 = a[4];
+                col6 = a[5];
+                col7 = a[6];
+            }
+
+            public string getCol1()
+            {
+                return col1;
+            }
+            public string getCol2()
+            {
+                return col2;
+            }
+            public string getCol3()
+            {
+                return col3;
+            }
+            public string getCol4()
+            {
+                return col4;
+            }
+            public string getCol5()
+            {
+                return col5;
+            }
+            public string getCol6()
+            {
+                return col6;
+            }
+            public string getCol7()
+            {
+                return col7;
+            }
+        } //아이템
+
+        public class Items2
+        {
+            string col1;
+            string col2;
+            string col3;
+            string col4;
+            string col5;
+            string col6;
+
+            public Items2(string[] a)
+            {
+                col1 = a[0];
+                col2 = a[1];
+                col3 = a[2];
+                col4 = a[3];
+                col5 = a[4];
+                col6 = a[5];
+
+            }
+
+            public string getCol1()
+            {
+                return col1;
+            }
+            public string getCol2()
+            {
+                return col2;
+            }
+            public string getCol3()
+            {
+                return col3;
+            }
+            public string getCol4()
+            {
+                return col4;
+            }
+            public string getCol5()
+            {
+                return col5;
+            }
+            public string getCol6()
+            {
+                return col6;
+            }
+
+        } //아이템
     }
-    public class Items
-    {
-        string col1;
-        string col2;
-        string col3;
-        string col4;
-        string col5;
-        string col6;
-        string col7;
-        public Items(string[] a)
-        {
-            col1 = a[0];
-            col2 = a[1];
-            col3 = a[2];
-            col4 = a[3];
-            col5 = a[4];
-            col6 = a[5];
-            col7 = a[6];
-        }
-
-        public string getCol1()
-        {
-            return col1;
-        }
-        public string getCol2()
-        {
-            return col2;
-        }
-        public string getCol3()
-        {
-            return col3;
-        }
-        public string getCol4()
-        {
-            return col4;
-        }
-        public string getCol5()
-        {
-            return col5;
-        }
-        public string getCol6()
-        {
-            return col6;
-        }
-        public string getCol7()
-        {
-            return col7;
-        }
-    } //아이템
-
-    public class Items2
-    {
-        string col1;
-        string col2;
-        string col3;
-        string col4;
-        string col5;
-        string col6;
-
-        public Items2(string[] a)
-        {
-            col1 = a[0];
-            col2 = a[1];
-            col3 = a[2];
-            col4 = a[3];
-            col5 = a[4];
-            col6 = a[5];
-
-        }
-
-        public string getCol1()
-        {
-            return col1;
-        }
-        public string getCol2()
-        {
-            return col2;
-        }
-        public string getCol3()
-        {
-            return col3;
-        }
-        public string getCol4()
-        {
-            return col4;
-        }
-        public string getCol5()
-        {
-            return col5;
-        }
-        public string getCol6()
-        {
-            return col6;
-        }
-
-    } //아이템
 }
