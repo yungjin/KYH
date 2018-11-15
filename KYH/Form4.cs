@@ -56,9 +56,19 @@ namespace KYH
             arr.Add(new tabbtn(tabPage3, "btn_1", "삭제", 80, 30, 250, 300));
 
             //탭페이지 안에 라벨 생성
-            arr.Add(new tablb(tabPage1, "lb", "내 PC에 설치된 프로그램을 관리합니다.", 224, 20, 45, 15));
-            arr.Add(new tablb(tabPage2, "lb", "컴퓨터나 인터넷 사용에 따른 사용기록과 목록을 삭제합니다.", 400, 20, 45, 15));
-            arr.Add(new tablb(tabPage3, "lb", "현재 사용중의 이유로 액세스 거부가 되어 삭제되지 않는 파일을 강제로 삭제합니다.", 500, 20, 45, 15));
+            arr.Add(new tablb(tabPage1, "lb", "내 PC에 설치된 프로그램을 관리합니다.", 224, 20, 45, 20));
+            arr.Add(new tablb(tabPage2, "lb", "컴퓨터나 인터넷 사용에 따른 사용기록과 목록을 삭제합니다.", 400, 20, 80, 20));
+            arr.Add(new tablb(tabPage3, "lb", "현재 사용중의 이유로 액세스 거부가 되어 삭제되지 않는 파일을 강제로 삭제합니다.", 500, 20, 45, 20));
+
+            //개인정보 탭
+            arr.Add(new cbtab(tabPage2, "1", "열어본 페이지 목록 삭제", 150, 60, 100, 80));
+            arr.Add(new cbtab(tabPage2, "2", "저장된 패스워드 삭제", 80, 60, 100, 130));
+            arr.Add(new cbtab(tabPage2, "3", "URL 히스토리 삭제", 80, 60, 100, 180));
+            arr.Add(new cbtab(tabPage2, "4", "실행 목록 삭제", 80, 60, 100, 230));
+            arr.Add(new cbtab(tabPage2, "5", "최근 열어본 문서 목록 삭제", 80, 60, 300, 80));
+            arr.Add(new cbtab(tabPage2, "6", "오피스 문서 기록 삭제", 80, 60, 300, 130));
+            arr.Add(new cbtab(tabPage2, "7", "자동완성 목록 삭제", 80, 60, 300, 180));
+            arr.Add(new cbtab(tabPage2, "8", "휴지통 비우기", 80, 60, 300, 230));
 
 
             for (int i = 0; i < arr.Count; i++)
@@ -70,14 +80,15 @@ namespace KYH
                 else if (typeof(tablb) == arr[i].GetType()) //arr[i] 객체가 lb (type 비교)
                 {
                     mc.lb((tablb)arr[i]);
+                }else if(typeof(cbtab) == arr[i].GetType())
+                {
+                    mc.cb((cbtab)arr[i]);
                 }
             }
 
             listView1 = ListPrint();
-            checkBox1 = UserDelete();
             listView2 = LIstPrint2();
             tabPage1.Controls.Add(listView1);
-            
             tabPage3.Controls.Add(listView2);
             Controls.AddRange(new Control[] { tabControl1 });
         }
@@ -115,25 +126,6 @@ namespace KYH
             listView1.Items.AddRange(new ListViewItem[] { item1, item2, item3 });
             return listView1;
         } //프로그램 삭제 탭
-        private CheckBox UserDelete()
-        {
-            for(int i = 0; i<2; i++)
-            {
-                for(int j=0; i<4; i++)
-                {
-                    checkBox1 = new CheckBox();
-                    checkBox1.AutoSize = true;
-                    checkBox1.Location = new Point(130, (i * 30) + 80);
-                    checkBox1.Name = "checkBox1";
-                    checkBox1.Size = new Size(86, 60);
-                    checkBox1.Text = string.Format("목록 삭제");
-                    checkBox1.UseVisualStyleBackColor = true;
-                    tabPage2.Controls.Add(checkBox1);
-                }
-            }
-
-            return checkBox1;
-        }   //개인정보 삭제 탭
         private ListView LIstPrint2()
         {
             listView2 = new ListView();
