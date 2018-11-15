@@ -19,6 +19,8 @@ namespace KYH
         private TabPage tabPage3;
         private ListView listView1;
         private ListView listView2;
+        private ListViewItem item3;
+        private CheckBox checkBox1;
 
         public Form4()
         {
@@ -35,7 +37,7 @@ namespace KYH
 
             tabControl1.Padding = new Point(22, 20);
             tabControl1.Controls.AddRange(new Control[] { tabPage1, tabPage2, tabPage3 });
-            tabControl1.Size = new Size(600, 500);
+            tabControl1.Size = new Size(800, 500);
             
 
             tabPage1.Text = "프로그램 삭제";
@@ -95,8 +97,11 @@ namespace KYH
         
         private void btn1_Click(object o, EventArgs args)
         {
-            MessageBox.Show("삭제완료");
+             item3.SubItems.Clear();
+            MessageBox.Show("삭제 완료");
         }
+
+      
       
         private ListView ListPrint()
         {
@@ -121,7 +126,7 @@ namespace KYH
             item2.SubItems.Add("HeidiSQL");
             item2.SubItems.Add("Ansgar Becker");
             item2.SubItems.Add("2018.10.05");
-            ListViewItem item3 = new ListViewItem(" ", 40);
+            item3 = new ListViewItem(" ", 40);
             item3.SubItems.Add("FileZilla Client 3.37.0");
             item3.SubItems.Add("Tim kosse");
             item3.SubItems.Add("2018.10.23");
