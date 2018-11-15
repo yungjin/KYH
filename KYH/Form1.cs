@@ -145,16 +145,15 @@ namespace KYH
         {
             ArrayList arrayList = new ArrayList();
 
-            arrayList.Add(new BtnSet(this, 110, 90, 0, 0, "image1", Button1_Click));
-            arrayList.Add(new BtnSet(this, 110, 90, 0, 90, "image2", Button2_Click));
-            arrayList.Add(new BtnSet(this, 110, 90, 0, 180, "image3", Button3_Click));
-            arrayList.Add(new BtnSet(this, 110, 90, 0, 270, "image4", Button4_Click));
+            arrayList.Add(new BtnSet(this, 110, 90, 1, 0, "image1", Button1_Click));
+            arrayList.Add(new BtnSet(this, 110, 90, 1, 90, "image2", Button2_Click));
+            arrayList.Add(new BtnSet(this, 110, 90, 1, 180, "image3", Button3_Click));
+            arrayList.Add(new BtnSet(this, 110, 90, 1, 270, "image4", Button4_Click));
 
             for (int i = 0; i < arrayList.Count; i++)
             {
                 btnClass.button((BtnSet)arrayList[i]);
             }
-
         }
 
         private void Logo_Load()
@@ -162,7 +161,7 @@ namespace KYH
             PictureBox pictureBox = new PictureBox();
 
             pictureBox.Image = (Bitmap)KYH.Properties.Resources.ResourceManager.GetObject("logo1");
-            pictureBox.Location = new Point(0, 360);
+            pictureBox.Location = new Point(5, 400);
             pictureBox.Size = new Size(250, 300);
 
             Controls.Add(pictureBox);
