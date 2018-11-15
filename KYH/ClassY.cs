@@ -34,7 +34,6 @@ namespace KYH
                         if (lv.Items[i].Checked == true)
                         {
                             lv.Items[i].SubItems[2].Text = "비활성화";
-                            
                         }
                     }
                 }
