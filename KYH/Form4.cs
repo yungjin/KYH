@@ -19,7 +19,6 @@ namespace KYH
         private TabPage tabPage3;
         private ListView listView1;
         private ListView listView2;
-        private CheckBox checkBox1;
 
         public Form4()
         {
@@ -47,18 +46,20 @@ namespace KYH
             tabPage2.BackColor = Color.WhiteSmoke;
             tabPage3.BackColor = Color.WhiteSmoke;
             
+            
             Modulecs mc = new Modulecs();
             ArrayList arr = new ArrayList();
 
             //탭페이지 안에 버튼 생성
-            arr.Add(new tabbtn(tabPage1, "btn_1", "삭제", 80, 30, 250, 300));
-            arr.Add(new tabbtn(tabPage2, "btn_1", "삭제", 80, 30, 250, 300));
-            arr.Add(new tabbtn(tabPage3, "btn_1", "삭제", 80, 30, 250, 300));
+            arr.Add(new tabbtn(tabPage1, "btn_1", "삭제", 80, 30, 250, 300,btn1_Click));
+            arr.Add(new tabbtn(tabPage2, "btn_2", "삭제", 80, 30, 250, 300, btn1_Click));
+            arr.Add(new tabbtn(tabPage3, "btn_3", "삭제", 80, 30, 250, 300, btn1_Click));
 
             //탭페이지 안에 라벨 생성
             arr.Add(new tablb(tabPage1, "lb", "내 PC에 설치된 프로그램을 관리합니다.", 224, 20, 45, 20));
             arr.Add(new tablb(tabPage2, "lb", "컴퓨터나 인터넷 사용에 따른 사용기록과 목록을 삭제합니다.", 400, 20, 80, 20));
             arr.Add(new tablb(tabPage3, "lb", "현재 사용중의 이유로 액세스 거부가 되어 삭제되지 않는 파일을 강제로 삭제합니다.", 500, 20, 45, 20));
+
 
             //개인정보 탭
             arr.Add(new cbtab(tabPage2, "1", "열어본 페이지 목록 삭제", 150, 60, 100, 80));
@@ -85,7 +86,6 @@ namespace KYH
                     mc.cb((cbtab)arr[i]);
                 }
             }
-
             listView1 = ListPrint();
             listView2 = LIstPrint2();
             tabPage1.Controls.Add(listView1);
@@ -93,18 +93,20 @@ namespace KYH
             Controls.AddRange(new Control[] { tabControl1 });
         }
         
-        private void btn1_Click(object sender, EventArgs args)
+        private void btn1_Click(object o, EventArgs args)
         {
             MessageBox.Show("삭제완료");
         }
+      
         private ListView ListPrint()
         {
             listView1 = new ListView();
             listView1.View = View.Details;
             listView1.CheckBoxes = true;
             listView1.GridLines = true;
-            listView1.Location = new Point(40, 40);
-            listView1.Size = new Size(505, 250);
+            listView1.Location = new Point(50, 70);
+            listView1.Size = new Size(500, 200);
+
             listView1.Columns.Add("", 25, HorizontalAlignment.Center);
             listView1.Columns.Add("프로그램명", 180, HorizontalAlignment.Center);
             listView1.Columns.Add("제작사", 200, HorizontalAlignment.Center);
@@ -132,8 +134,8 @@ namespace KYH
             listView2.View = View.Details;
             listView2.CheckBoxes = true;
             listView2.GridLines = true;
-            listView2.Location = new Point(40, 40);
-            listView2.Size = new Size(505, 250);
+            listView2.Location = new Point(50, 70);
+            listView2.Size = new Size(500, 200);
             listView2.Columns.Add(" ", 25);
             listView2.Columns.Add("파일명", 480);
             listView2.BackColor = Color.Gainsboro;

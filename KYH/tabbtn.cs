@@ -13,7 +13,7 @@ namespace KYH
         string name, text;
         int sX, sY, pX, pY;
 
-        public tabbtn(TabPage tabPage2, string name, string text, int sX, int sY, int pX, int pY)
+        public tabbtn(TabPage tabPage2, string name, string text, int sX, int sY, int pX, int pY, EventHandler eh)
         {
             this.tabPage2 = tabPage2;
             this.name = name;
@@ -22,8 +22,10 @@ namespace KYH
             this.sY = sY;
             this.pX = pX;
             this.pY = pY;
+            this.eh = eh;
         }
 
+        public EventHandler eh;
         public TabPage TabPage
         {
             get

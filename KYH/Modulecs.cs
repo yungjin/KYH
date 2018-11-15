@@ -20,6 +20,7 @@ namespace KYH
             btn.Location = new Point(bb.PX, bb.PY);
             btn.Cursor = Cursors.Hand;
             bb.TabPage.Controls.Add(btn);
+            btn.Click += bb.eh;
         }
 
         public void lb(tablb lb)
