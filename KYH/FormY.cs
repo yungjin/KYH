@@ -109,7 +109,7 @@ namespace KYH
             arr.Add(new tabbtn(tabPage2, "btn_1", "중지", 90, 50, 350, 280, Cy.Btn3_Click));
             arr.Add(new tabbtn(tabPage2, "btn_1", "실행", 90, 50, 370 + 90, 280, Cy.Btn4_Click));
 
-            arr.Add(new tablb(tabPage1, "lb", "시작 프로그램이 많을 경우 컴퓨터가 느려지고 부팅 속도도 많이 느려집니다.", 500, 20, 50, 40));
+            arr.Add(new tablb(tabPage1, "lb", "시작 프로그램이 많을 경우 컴퓨터가 느려지고 부팅 속도도 많이 느려집니다.", 600, 20, 50, 40));
             arr.Add(new tablb(tabPage2, "lb", "서비스 프로그램을 시작 / 중지 시키는 기능입니다.", 400, 20, 50, 20));
             arr.Add(new tablb(tabPage2, "lb", "부팅을 빠르게 하고, 인터넷이 느릴때 도움되는 기능입니다.", 500, 20, 50, 40));
 
