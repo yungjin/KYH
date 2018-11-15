@@ -22,18 +22,16 @@ namespace KYH
             bb.TabPage.Controls.Add(btn);
             btn.Click += bb.eh;
         }
-
         public void lb(tablb lb)
         {
             Label label = new Label();
             label.Name = lb.Name;
             label.Text = lb.Text;
+            label.Font = new Font("굴림", 15F, FontStyle.Regular,GraphicsUnit.Point, ((byte)(200)));
             label.Size = new Size(lb.SX, lb.SY);
             label.Location = new Point(lb.PX, lb.PY);
-            label.Cursor = Cursors.Hand;
             lb.TabPage.Controls.Add(label);
         }
-
         public void cb(cbtab cb)
         {
             CheckBox checkBox1 = new CheckBox();

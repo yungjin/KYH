@@ -20,14 +20,13 @@ namespace KYH
         private ListView listView1;
         private ListView listView2;
         private ListViewItem item3;
-        private CheckBox checkBox1;
 
         public Form4()
         {
             InitializeComponent();
             Load += Form4_Load;
+            ClientSize = new Size(610, 420);
         }
-
         private void Form4_Load(object sender, EventArgs e)
         {
             tabControl1 = new TabControl();
@@ -37,7 +36,7 @@ namespace KYH
 
             tabControl1.Padding = new Point(22, 20);
             tabControl1.Controls.AddRange(new Control[] { tabPage1, tabPage2, tabPage3 });
-            tabControl1.Size = new Size(800, 500);
+            tabControl1.Size = new Size(650, 420);
             
 
             tabPage1.Text = "프로그램 삭제";
@@ -51,6 +50,8 @@ namespace KYH
             
             Modulecs mc = new Modulecs();
             ArrayList arr = new ArrayList();
+            ArrayList col_list = new ArrayList();
+            ArrayList item_list = new ArrayList();
 
             //탭페이지 안에 버튼 생성
             arr.Add(new tabbtn(tabPage1, "btn_1", "삭제", 80, 30, 250, 300,btn1_Click));
@@ -58,11 +59,10 @@ namespace KYH
             arr.Add(new tabbtn(tabPage3, "btn_3", "삭제", 80, 30, 250, 300, btn1_Click));
 
             //탭페이지 안에 라벨 생성
-            arr.Add(new tablb(tabPage1, "lb", "내 PC에 설치된 프로그램을 관리합니다.", 224, 20, 45, 20));
-            arr.Add(new tablb(tabPage2, "lb", "컴퓨터나 인터넷 사용에 따른 사용기록과 목록을 삭제합니다.", 400, 20, 80, 20));
-            arr.Add(new tablb(tabPage3, "lb", "현재 사용중의 이유로 액세스 거부가 되어 삭제되지 않는 파일을 강제로 삭제합니다.", 500, 20, 45, 20));
-
-
+            arr.Add(new tablb(tabPage1, "lb", "내 PC에 설치된 프로그램을 관리합니다.", 400, 20, 45, 20));
+            arr.Add(new tablb(tabPage2, "lb", "컴퓨터나 인터넷 사용에 따른 사용기록과 목록을 삭제합니다.", 500, 20, 80, 20));
+            arr.Add(new tablb(tabPage3, "lb", "액세스 거부가 되어 삭제되지 않는 파일을 강제로 삭제합니다.", 500, 20, 45, 20));
+            
             //개인정보 탭
             arr.Add(new cbtab(tabPage2, "1", "열어본 페이지 목록 삭제", 150, 60, 100, 80));
             arr.Add(new cbtab(tabPage2, "2", "저장된 패스워드 삭제", 80, 60, 100, 130));
@@ -72,7 +72,7 @@ namespace KYH
             arr.Add(new cbtab(tabPage2, "6", "오피스 문서 기록 삭제", 80, 60, 300, 130));
             arr.Add(new cbtab(tabPage2, "7", "자동완성 목록 삭제", 80, 60, 300, 180));
             arr.Add(new cbtab(tabPage2, "8", "휴지통 비우기", 80, 60, 300, 230));
-
+            
 
             for (int i = 0; i < arr.Count; i++)
             {
@@ -83,26 +83,24 @@ namespace KYH
                 else if (typeof(tablb) == arr[i].GetType()) //arr[i] 객체가 lb (type 비교)
                 {
                     mc.lb((tablb)arr[i]);
-                }else if(typeof(cbtab) == arr[i].GetType())
+                }
+                else if(typeof(cbtab) == arr[i].GetType())
                 {
                     mc.cb((cbtab)arr[i]);
                 }
             }
+
             listView1 = ListPrint();
             listView2 = LIstPrint2();
             tabPage1.Controls.Add(listView1);
             tabPage3.Controls.Add(listView2);
             Controls.AddRange(new Control[] { tabControl1 });
         }
-        
         private void btn1_Click(object o, EventArgs args)
         {
              item3.SubItems.Clear();
             MessageBox.Show("삭제 완료");
         }
-
-      
-      
         private ListView ListPrint()
         {
             listView1 = new ListView();
@@ -116,8 +114,8 @@ namespace KYH
             listView1.Columns.Add("프로그램명", 180, HorizontalAlignment.Center);
             listView1.Columns.Add("제작사", 200, HorizontalAlignment.Center);
             listView1.Columns.Add("설치일", 100, HorizontalAlignment.Center);
-            listView1.BackColor = Color.Gainsboro;
             listView1.ForeColor = Color.Black;
+            listView1.BackColor = Color.Gainsboro;
             ListViewItem item1 = new ListViewItem(" ", 60);
             item1.SubItems.Add("Chrom");
             item1.SubItems.Add("Google.inc");
@@ -131,6 +129,7 @@ namespace KYH
             item3.SubItems.Add("Tim kosse");
             item3.SubItems.Add("2018.10.23");
             listView1.Items.AddRange(new ListViewItem[] { item1, item2, item3 });
+            
             return listView1;
         } //프로그램 삭제 탭
         private ListView LIstPrint2()
@@ -152,5 +151,7 @@ namespace KYH
             listView2.Items.AddRange(new ListViewItem[] { item1, item2 });
             return listView2;
         }   //파일 강제삭제
+
+
     }
 }
