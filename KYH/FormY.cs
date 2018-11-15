@@ -60,9 +60,9 @@ namespace KYH
             ListView lv = lv_create(col_list, item_list);
 
 
-            Col_Y Col = new Col_Y(col_list, item_list);      //헤더 아이템 크리에이터1
-            Col_Y Col2 = new Col_Y(col2_list, item2_list);  //헤더 아이템 크리에이터2
-            ClassY Cy = new ClassY(col_list, item_list);
+            //Col_Y Col = new Col_Y(col_list, item_list);      //헤더 아이템 크리에이터1
+            //Col_Y Col2 = new Col_Y(col2_list, item2_list);  //헤더 아이템 크리에이터2
+            //ClassY Cy = new ClassY(col_list, item_list);
 
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
