@@ -24,6 +24,11 @@ namespace KYH
         public Form4()
         {
             InitializeComponent();
+
+            WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.None;
+
+            BackColor = Color.WhiteSmoke;
             Load += Form4_Load;
         }
 

@@ -84,15 +84,15 @@ namespace KYH
 
         private void Panel2_Load()
         {
-            Form2 form2 = new Form2();
-            form2.MdiParent = this;
+            FormY formY = new FormY();
+            formY.MdiParent = this;
 
             panel2.Location = new Point(111, 3);
             panel2.Size = new Size(650, 400);
 
             Controls.Add(panel2);
-            panel2.Controls.Add(form2);
-            form2.Show();
+            panel2.Controls.Add(formY);
+            formY.Show();
         }
 
         private void Button3_Click(object o, EventArgs e)  // 삭제
@@ -107,15 +107,15 @@ namespace KYH
 
         private void Panel3_Load()
         {
-            Form2 form2 = new Form2();
-            form2.MdiParent = this;
+            Form4 form4 = new Form4();
+            form4.MdiParent = this;
 
             panel3.Location = new Point(111, 3);
             panel3.Size = new Size(650, 400);
 
             Controls.Add(panel3);
-            panel3.Controls.Add(form2);
-            form2.Show();
+            panel3.Controls.Add(form4);
+            form4.Show();
         }
 
         private void Button4_Click(object o, EventArgs e)  // PC상태
