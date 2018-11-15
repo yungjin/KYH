@@ -84,8 +84,8 @@ namespace KYH
             item_list.Add(new Items(new string[] { " ", "FileZilla Client 3.37.0", "Tim kosse", " 2018.10.23" }));
 
             //가상데이터 2
-            col2_list.Add(new string[] { " ", "30","L" });
-            col2_list.Add(new string[] { "파일명", "480", "L" });
+            col2_list.Add(new string[] { " ", "30" });
+            col2_list.Add(new string[] { "파일명", "480" });
 
             item2_list.Add(new Items2(new string[] { " ", "WindowsApp.exe" }));
             item2_list.Add(new Items2(new string[] { " ", "WindowsApp2.exe" }));
@@ -196,7 +196,7 @@ namespace KYH
                 ColumnHeader columnHeader = new ColumnHeader();
                 columnHeader.Text = arr[0];
                 columnHeader.Width = Convert.ToInt32(arr[1]);
-                columnHeader.TextAlign = HorizontalAlignment.Center;
+                columnHeader.TextAlign = HorizontalAlignment.Left;
                 listView2.Columns.Add(columnHeader);
 
             }
