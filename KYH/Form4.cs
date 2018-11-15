@@ -13,14 +13,6 @@ namespace KYH
 {
     public partial class Form4 : Form
     {
-        private TabControl tabControl1;
-        private TabPage tabPage1;
-        private TabPage tabPage2;
-        private TabPage tabPage3;
-        private ListView listView1;
-        private ListView listView2;
-        private ListViewItem item3;
-
         public Form4()
         {
             InitializeComponent();
@@ -31,18 +23,24 @@ namespace KYH
             BackColor = Color.WhiteSmoke;
             Load += Form4_Load;
             ClientSize = new Size(610, 420);
+            
         }
+        ArrayList col_list = new ArrayList();
+        ArrayList item_list = new ArrayList();
+        ArrayList col2_list = new ArrayList();
+        ArrayList item2_list = new ArrayList();
+
+
         private void Form4_Load(object sender, EventArgs e)
         {
-            tabControl1 = new TabControl();
-            tabPage1 = new TabPage();
-            tabPage2 = new TabPage();
-            tabPage3 = new TabPage();
+            TabControl tabControl1 = new TabControl();
+            TabPage tabPage1 = new TabPage();
+            TabPage tabPage2 = new TabPage();
+            TabPage tabPage3 = new TabPage();
 
             tabControl1.Padding = new Point(22, 20);
             tabControl1.Controls.AddRange(new Control[] { tabPage1, tabPage2, tabPage3 });
             tabControl1.Size = new Size(650, 420);
-            
 
             tabPage1.Text = "프로그램 삭제";
             tabPage2.Text = "개인정보 삭제";
@@ -55,13 +53,10 @@ namespace KYH
             
             Modulecs mc = new Modulecs();
             ArrayList arr = new ArrayList();
-            ArrayList col_list = new ArrayList();
-            ArrayList item_list = new ArrayList();
 
-            //탭페이지 안에 버튼 생성
-            arr.Add(new tabbtn(tabPage1, "btn_1", "삭제", 80, 30, 250, 300,btn1_Click));
-            arr.Add(new tabbtn(tabPage2, "btn_2", "삭제", 80, 30, 250, 300, btn1_Click));
-            arr.Add(new tabbtn(tabPage3, "btn_3", "삭제", 80, 30, 250, 300, btn1_Click));
+
+
+
 
             //탭페이지 안에 라벨 생성
             arr.Add(new tablb(tabPage1, "lb", "내 PC에 설치된 프로그램을 관리합니다.", 400, 20, 45, 20));
@@ -77,8 +72,37 @@ namespace KYH
             arr.Add(new cbtab(tabPage2, "6", "오피스 문서 기록 삭제", 80, 60, 300, 130));
             arr.Add(new cbtab(tabPage2, "7", "자동완성 목록 삭제", 80, 60, 300, 180));
             arr.Add(new cbtab(tabPage2, "8", "휴지통 비우기", 80, 60, 300, 230));
+
+            //리스트뷰 
+            col_list.Add(new string[] { " ", "30" });
+            col_list.Add(new string[] { "프로그램명", "180" });
+            col_list.Add(new string[] { "제작사", "200" });
+            col_list.Add(new string[] { "설치일", "100" });
+
+            item_list.Add(new Items(new string[] { " ", "Chrom", " Google.inc ", "2018.09.17"}));
+            item_list.Add(new Items(new string[] { " ", "HeidiSQL", "Ansgar Becker", " 2018.10.05"}));
+            item_list.Add(new Items(new string[] { " ", "FileZilla Client 3.37.0", "Tim kosse", " 2018.10.23" }));
+
+            //가상데이터 2
+            col2_list.Add(new string[] { " ", "30","L" });
+            col2_list.Add(new string[] { "파일명", "480", "L" });
+
+            item2_list.Add(new Items2(new string[] { " ", "WindowsApp.exe" }));
+            item2_list.Add(new Items2(new string[] { " ", "WindowsApp2.exe" }));
             
 
+            ListView listView1 = lv_create(col_list, item_list);
+            ListView listView2 = lv2_create(col2_list, item2_list);
+
+            ClassY Cy;
+            Cy = new ClassY(listView1, listView2);
+
+            //탭페이지 안에 버튼 생성
+            arr.Add(new tabbtn(tabPage1, "btn_1", "삭제", 80, 30, 250, 300, Cy.btn1_Click));
+            arr.Add(new tabbtn(tabPage2, "btn_2", "삭제", 80, 30, 250, 300, Cy.btn2_Click));
+            arr.Add(new tabbtn(tabPage3, "btn_3", "삭제", 80, 30, 250, 300, Cy.btn1_Click));
+
+            
             for (int i = 0; i < arr.Count; i++)
             {
                 if (typeof(tabbtn) == arr[i].GetType())  //arr[i] 객체가 btn의 객체이면 (type을 비교)
@@ -95,68 +119,167 @@ namespace KYH
                 }
             }
 
-            listView1 = ListPrint();
-            listView2 = LIstPrint2();
+
             tabPage1.Controls.Add(listView1);
             tabPage3.Controls.Add(listView2);
             Controls.AddRange(new Control[] { tabControl1 });
         }
-        private void btn1_Click(object o, EventArgs args)
+
+        public ListView lv_create(ArrayList col_list, ArrayList item_list) //관리 리스트 뷰
         {
-             item3.SubItems.Clear();
-            MessageBox.Show("삭제 완료");
-        }
-        private ListView ListPrint()
-        {
-            listView1 = new ListView();
-            listView1.View = View.Details;
-            listView1.CheckBoxes = true;
+
+            ListView listView1 = new ListView();
+
             listView1.GridLines = true;
             listView1.Location = new Point(50, 70);
+            listView1.CheckBoxes = true;
+            listView1.GridLines = true;
+            listView1.Name = "listView1";
             listView1.Size = new Size(500, 200);
-
-            listView1.Columns.Add("", 25, HorizontalAlignment.Center);
-            listView1.Columns.Add("프로그램명", 180, HorizontalAlignment.Center);
-            listView1.Columns.Add("제작사", 200, HorizontalAlignment.Center);
-            listView1.Columns.Add("설치일", 100, HorizontalAlignment.Center);
-            listView1.ForeColor = Color.Black;
+            listView1.TabIndex = 0;
+            listView1.UseCompatibleStateImageBehavior = false;
+            listView1.View = View.Details;
             listView1.BackColor = Color.Gainsboro;
-            ListViewItem item1 = new ListViewItem(" ", 60);
-            item1.SubItems.Add("Chrom");
-            item1.SubItems.Add("Google.inc");
-            item1.SubItems.Add("2018.09.17");
-            ListViewItem item2 = new ListViewItem(" ", 40);
-            item2.SubItems.Add("HeidiSQL");
-            item2.SubItems.Add("Ansgar Becker");
-            item2.SubItems.Add("2018.10.05");
-            item3 = new ListViewItem(" ", 40);
-            item3.SubItems.Add("FileZilla Client 3.37.0");
-            item3.SubItems.Add("Tim kosse");
-            item3.SubItems.Add("2018.10.23");
-            listView1.Items.AddRange(new ListViewItem[] { item1, item2, item3 });
-            
+            listView1.ForeColor = Color.Black;
+
+
+            bool I_check = Items_create(item_list, listView1);
+            bool h_check = col_create(col_list, listView1);
+
+
             return listView1;
-        } //프로그램 삭제 탭
-        private ListView LIstPrint2()
+        }
+
+        public ListView lv2_create(ArrayList col_list, ArrayList item_list) //관리 리스트 뷰
         {
-            listView2 = new ListView();
-            listView2.View = View.Details;
-            listView2.CheckBoxes = true;
+
+            ListView listView2 = new ListView();
+
             listView2.GridLines = true;
             listView2.Location = new Point(50, 70);
+            listView2.CheckBoxes = true;
+            listView2.GridLines = true;
+            listView2.Name = "listView1";
             listView2.Size = new Size(500, 200);
-            listView2.Columns.Add(" ", 25);
-            listView2.Columns.Add("파일명", 480);
+            listView2.TabIndex = 0;
+            listView2.UseCompatibleStateImageBehavior = false;
+            listView2.View = View.Details;
             listView2.BackColor = Color.Gainsboro;
             listView2.ForeColor = Color.Black;
-            ListViewItem item1 = new ListViewItem(" ", 100);
-            item1.SubItems.Add("WindowsApp.exe");
-            ListViewItem item2 = new ListViewItem(" ", 100);
-            item2.SubItems.Add("WindowsApp2.exe");
-            listView2.Items.AddRange(new ListViewItem[] { item1, item2 });
+            
+            bool I2_check = Items2_create(item_list, listView2);
+            bool h2_check = col2_create(col_list, listView2);
+            
             return listView2;
-        }   //파일 강제삭제
+        }
 
+        private bool col_create(ArrayList col_list, ListView listView1)
+        {
+            for (int i = 0; i < col_list.Count; i++)
+            {
+                string[] arr = (string[])col_list[i]; //(string[]) 명시적 형변환
+                ColumnHeader columnHeader = new ColumnHeader();
+                columnHeader.Text = arr[0];
+                columnHeader.Width = Convert.ToInt32(arr[1]);
+                columnHeader.TextAlign = HorizontalAlignment.Center;
+                listView1.Columns.Add(columnHeader);
+
+            }
+            return true;
+        }
+
+        private bool col2_create(ArrayList col2_list, ListView listView2)
+        {
+            for (int i = 0; i < col2_list.Count; i++)
+            {
+                string[] arr = (string[])col2_list[i]; //(string[]) 명시적 형변환
+                ColumnHeader columnHeader = new ColumnHeader();
+                columnHeader.Text = arr[0];
+                columnHeader.Width = Convert.ToInt32(arr[1]);
+                columnHeader.TextAlign = HorizontalAlignment.Center;
+                listView2.Columns.Add(columnHeader);
+
+            }
+            return true;
+        }
+
+        private bool Items_create(ArrayList item_list, ListView listView1)
+        {
+            for (int i = 0; i < item_list.Count; i++)
+            {
+                Items row = (Items)item_list[i];
+                ListViewItem item = new ListViewItem(row.getCol1());
+                item.SubItems.Add(row.getCol2());
+                item.SubItems.Add(row.getCol3());
+                item.SubItems.Add(row.getCol4());
+                listView1.Items.Add(item);
+            }
+            return true;
+        }
+        private bool Items2_create(ArrayList item2_list, ListView listView2)
+        {
+            for (int i = 0; i < item2_list.Count; i++)
+            {
+                Items2 row = (Items2)item2_list[i];
+                ListViewItem item = new ListViewItem(row.getCol1());
+                item.SubItems.Add(row.getCol2());
+                listView2.Items.Add(item);
+            }
+            return true;
+        }
+    }
+    public class Items
+    {
+        string col1;
+        string col2;
+        string col3;
+        string col4;
+
+        public Items(string[] a)
+        {
+            col1 = a[0];
+            col2 = a[1];
+            col3 = a[2];
+            col4 = a[3];
+        }
+
+        public string getCol1()
+        {
+            return col1;
+        }
+        public string getCol2()
+        {
+            return col2;
+        }
+        public string getCol3()
+        {
+            return col3;
+        }
+        public string getCol4()
+        {
+            return col4;
+        }
+    }
+    public class Items2
+    {
+        string col1;
+        string col2;
+
+        public Items2(string[] a)
+        {
+            col1 = a[0];
+            col2 = a[1];
+        }
+
+        public string getCol1()
+        {
+            return col1;
+        }
+        public string getCol2()
+        {
+            return col2;
+        }
 
     }
+
 }

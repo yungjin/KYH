@@ -11,15 +11,21 @@ namespace KYH
     {
         ListView lv;
         ListView lv2;
+        ListView listView1;
+        ListView listView2;
         int num;
-
-
-
+        
         public ClassY(ListView lv, ListView lv2, int num)
         {
             this.lv = lv;
             this.num = num;
             this.lv2 = lv2;
+        }
+
+        public ClassY(ListView listView1, ListView listView2)
+        {
+            this.listView1 = listView1;
+            this.listView2 = listView2;
         }
 
         public void Btn_Click(object sender, EventArgs e)
@@ -89,6 +95,39 @@ namespace KYH
                     }
                 }
             }
+        }
+        public void btn1_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem listitem in listView1.Items)
+            {
+                if (listView1.Items.Count > 0)
+                {
+                    for (int i = listView1.Items.Count - 1; i >= 0; i--)
+                    {
+                        if (listView1.Items[i].Checked == true)
+                        {
+                            listView1.Items[i].Remove();
+                        }
+                    }
+                }
+            }
+            foreach (ListViewItem listitem in listView2.Items)
+            {
+                if (listView2.Items.Count > 0)
+                {
+                    for (int i = listView2.Items.Count - 1; i >= 0; i--)
+                    {
+                        if (listView2.Items[i].Checked == true)
+                        {
+                            listView2.Items[i].Remove();
+                        }
+                    }
+                }
+            }
+        }
+        public void btn2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("삭제 완료 되었습니다.");
         }
     }
 }
