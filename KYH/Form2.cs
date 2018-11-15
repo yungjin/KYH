@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,8 +13,7 @@ namespace KYH
 {
     public partial class Form2 : Form
     {
-        Button btnHard = new Button();
-        Button btnProcess = new Button();
+        BtnClass btnClass = new BtnClass();
 
         public Form2()
         {
@@ -29,18 +29,25 @@ namespace KYH
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            btnHard.Text = "하드디스크 최적화";
-            btnHard.Size = new Size(200, 80);
-            btnHard.Location = new Point(80, 80);
-            btnHard.BackColor = Color.Gainsboro;
+            ArrayList arrayList = new ArrayList();
 
-            btnProcess.Text = "프로세스 최적화";
-            btnProcess.Size = new Size(200, 80);
-            btnProcess.Location = new Point(80, 200);
-            btnProcess.BackColor = Color.Gainsboro;
+            arrayList.Add(new BtnSet(this,"하드디스크 최적화", 200, 80, 80, 80, BtnHard_Click));
+            arrayList.Add(new BtnSet(this, "프로세스 최적화",200, 80, 80, 200, BtnProcess_Click));
 
-            Controls.Add(btnHard);
-            Controls.Add(btnProcess);
+            for (int i = 0; i < arrayList.Count; i++)
+            {
+                btnClass.button1((BtnSet)arrayList[i]);
+            }
+        }
+
+        private void BtnHard_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("하드디스크 최적화");
+        }
+
+        private void BtnProcess_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("프로세스 최적화");
         }
     }
 }

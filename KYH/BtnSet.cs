@@ -10,6 +10,7 @@ namespace KYH
     class BtnSet
     {
         Form form;
+        string text;
         int sizeX;
         int sizeY;
         int pointX;
@@ -28,6 +29,18 @@ namespace KYH
             this.imageRoute = imageRoute;
             this.eventHandler = eventHandler;
         }
+
+        public BtnSet(Form form,string text, int sizeX, int sizeY, int pointX, int pointY, EventHandler eventHandler)
+        {
+            this.form = form;
+            this.text = text;
+            this.sizeX = sizeX;
+            this.sizeY = sizeY;
+            this.pointX = pointX;
+            this.pointY = pointY;
+            this.eventHandler = eventHandler;
+        }
+
         public Form Form
         {
             get
@@ -70,5 +83,7 @@ namespace KYH
                 return imageRoute;
             }
         }
+
+        public string Text { get => text;}
     }
 }
