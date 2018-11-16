@@ -13,6 +13,10 @@ namespace KYH
 {
     public partial class Form4 : Form
     {
+        ArrayList col_list = new ArrayList();
+        ArrayList item_list = new ArrayList();
+        ArrayList col2_list = new ArrayList();
+        ArrayList item2_list = new ArrayList();
         public Form4()
         {
             InitializeComponent();
@@ -22,14 +26,8 @@ namespace KYH
 
             BackColor = Color.WhiteSmoke;
             Load += Form4_Load;
-            ClientSize = new Size(610, 420);
             
         }
-        ArrayList col_list = new ArrayList();
-        ArrayList item_list = new ArrayList();
-        ArrayList col2_list = new ArrayList();
-        ArrayList item2_list = new ArrayList();
-
 
         private void Form4_Load(object sender, EventArgs e)
         {
@@ -40,7 +38,12 @@ namespace KYH
 
             tabControl1.Padding = new Point(22, 20);
             tabControl1.Controls.AddRange(new Control[] { tabPage1, tabPage2, tabPage3 });
-            tabControl1.Size = new Size(650, 420);
+            tabControl1.Size = new Size(600, 500);
+            tabControl1.ShowToolTips = true;
+
+            tabPage1.ToolTipText = "프로그램 삭제 탭입니다.";
+            tabPage2.ToolTipText = "개인정보 삭제 탭입니다.";
+            tabPage3.ToolTipText = "파일 강제삭제 탭입니다.";
 
             tabPage1.Text = "프로그램 삭제";
             tabPage2.Text = "개인정보 삭제";
@@ -50,14 +53,9 @@ namespace KYH
             tabPage2.BackColor = Color.WhiteSmoke;
             tabPage3.BackColor = Color.WhiteSmoke;
             
-            
             Modulecs mc = new Modulecs();
             ArrayList arr = new ArrayList();
-
-
-
-
-
+            
             //탭페이지 안에 라벨 생성
             arr.Add(new tablb(tabPage1, "lb", "내 PC에 설치된 프로그램을 관리합니다.", 400, 20, 45, 20));
             arr.Add(new tablb(tabPage2, "lb", "컴퓨터나 인터넷 사용에 따른 사용기록과 목록을 삭제합니다.", 500, 20, 80, 20));
@@ -73,7 +71,7 @@ namespace KYH
             arr.Add(new cbtab(tabPage2, "7", "자동완성 목록 삭제", 80, 60, 300, 180));
             arr.Add(new cbtab(tabPage2, "8", "휴지통 비우기", 80, 60, 300, 230));
 
-            //리스트뷰 
+            //프로그램 삭제탭 리스트뷰 
             col_list.Add(new string[] { " ", "30" });
             col_list.Add(new string[] { "프로그램명", "180" });
             col_list.Add(new string[] { "제작사", "200" });
@@ -83,7 +81,7 @@ namespace KYH
             item_list.Add(new Items(new string[] { " ", "HeidiSQL", "Ansgar Becker", " 2018.10.05"}));
             item_list.Add(new Items(new string[] { " ", "FileZilla Client 3.37.0", "Tim kosse", " 2018.10.23" }));
 
-            //가상데이터 2
+            //파일강제 삭제탭 리스트 뷰
             col2_list.Add(new string[] { " ", "30" });
             col2_list.Add(new string[] { "파일명", "480" });
 
@@ -94,22 +92,21 @@ namespace KYH
             ListView listView1 = lv_create(col_list, item_list);
             ListView listView2 = lv2_create(col2_list, item2_list);
 
-            ClassY Cy;
-            Cy = new ClassY(listView1, listView2);
+            ClassY Cy = new ClassY(listView1, listView2);   
 
             //탭페이지 안에 버튼 생성
-            arr.Add(new tabbtn(tabPage1, "btn_1", "삭제", 80, 30, 250, 300, Cy.btn1_Click));
-            arr.Add(new tabbtn(tabPage2, "btn_2", "삭제", 80, 30, 250, 300, Cy.btn2_Click));
-            arr.Add(new tabbtn(tabPage3, "btn_3", "삭제", 80, 30, 250, 300, Cy.btn1_Click));
+            arr.Add(new tabbtn(tabPage1, "btn_1", "삭제", 90, 50, 250, 280, Cy.btn1_Click));
+            arr.Add(new tabbtn(tabPage2, "btn_2", "삭제", 90, 50, 250, 280, Cy.btn2_Click));
+            arr.Add(new tabbtn(tabPage3, "btn_3", "삭제", 90, 50, 250, 280, Cy.btn1_Click));
 
             
             for (int i = 0; i < arr.Count; i++)
             {
-                if (typeof(tabbtn) == arr[i].GetType())  //arr[i] 객체가 btn의 객체이면 (type을 비교)
+                if (typeof(tabbtn) == arr[i].GetType())  
                 {
                     mc.btn((tabbtn)arr[i]);
                 }
-                else if (typeof(tablb) == arr[i].GetType()) //arr[i] 객체가 lb (type 비교)
+                else if (typeof(tablb) == arr[i].GetType()) 
                 {
                     mc.lb((tablb)arr[i]);
                 }
@@ -119,7 +116,6 @@ namespace KYH
                 }
             }
 
-
             tabPage1.Controls.Add(listView1);
             tabPage3.Controls.Add(listView2);
             Controls.AddRange(new Control[] { tabControl1 });
@@ -127,9 +123,8 @@ namespace KYH
 
         public ListView lv_create(ArrayList col_list, ArrayList item_list) //관리 리스트 뷰
         {
-
             ListView listView1 = new ListView();
-
+            
             listView1.GridLines = true;
             listView1.Location = new Point(50, 70);
             listView1.CheckBoxes = true;
@@ -149,7 +144,6 @@ namespace KYH
 
             return listView1;
         }
-
         public ListView lv2_create(ArrayList col_list, ArrayList item_list) //관리 리스트 뷰
         {
 
@@ -187,7 +181,6 @@ namespace KYH
             }
             return true;
         }
-
         private bool col2_create(ArrayList col2_list, ListView listView2)
         {
             for (int i = 0; i < col2_list.Count; i++)
@@ -209,6 +202,7 @@ namespace KYH
             {
                 Items row = (Items)item_list[i];
                 ListViewItem item = new ListViewItem(row.getCol1());
+                
                 item.SubItems.Add(row.getCol2());
                 item.SubItems.Add(row.getCol3());
                 item.SubItems.Add(row.getCol4());
@@ -228,58 +222,4 @@ namespace KYH
             return true;
         }
     }
-    public class Items
-    {
-        string col1;
-        string col2;
-        string col3;
-        string col4;
-
-        public Items(string[] a)
-        {
-            col1 = a[0];
-            col2 = a[1];
-            col3 = a[2];
-            col4 = a[3];
-        }
-
-        public string getCol1()
-        {
-            return col1;
-        }
-        public string getCol2()
-        {
-            return col2;
-        }
-        public string getCol3()
-        {
-            return col3;
-        }
-        public string getCol4()
-        {
-            return col4;
-        }
-    }
-    public class Items2
-    {
-        string col1;
-        string col2;
-
-        public Items2(string[] a)
-        {
-            col1 = a[0];
-            col2 = a[1];
-        }
-
-        public string getCol1()
-        {
-            return col1;
-        }
-        public string getCol2()
-        {
-            return col2;
-        }
-
-    }
-
 }

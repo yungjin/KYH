@@ -17,7 +17,7 @@ namespace KYH
             button.Size = new Size(btnSet.SizeX, btnSet.SizeY);
             button.Location = new Point(btnSet.PointX, btnSet.PointY);
             button.Image = (Bitmap)KYH.Properties.Resources.ResourceManager.GetObject(btnSet.ImageRoute);
-
+            button.Cursor = Cursors.Hand;
             button.Click += btnSet.eventHandler;
 
             btnSet.Form.Controls.Add(button);
