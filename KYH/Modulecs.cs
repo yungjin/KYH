@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace KYH
 {
-    class Modulecs
+    class Modulecs  //tabControl button object
     {
         public void btn(tabbtn bb)
         {
@@ -39,6 +39,7 @@ namespace KYH
             checkBox1.Location = new Point(cb.PX,cb.PY);
             checkBox1.Size = new Size(cb.SX, cb.SY);
             checkBox1.Text = cb.Text;
+            checkBox1.Cursor = Cursors.Hand;
             cb.TabPage.Controls.Add(checkBox1);
         }
     }

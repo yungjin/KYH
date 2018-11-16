@@ -33,11 +33,13 @@ namespace KYH
             btnHard.Size = new Size(200, 80);
             btnHard.Location = new Point(80, 80);
             btnHard.BackColor = Color.Gainsboro;
+            btnHard.Cursor = Cursors.Hand;
 
             btnProcess.Text = "프로세스 최적화";
             btnProcess.Size = new Size(200, 80);
             btnProcess.Location = new Point(80, 200);
             btnProcess.BackColor = Color.Gainsboro;
+            btnProcess.Cursor = Cursors.Hand;
 
             Controls.Add(btnHard);
             Controls.Add(btnProcess);

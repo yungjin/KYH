@@ -80,6 +80,7 @@
     <Compile Include="FormY.Designer.cs">
       <DependentUpon>FormY.cs</DependentUpon>
     </Compile>
+    <Compile Include="Items.cs" />
     <Compile Include="LblClass.cs" />
     <Compile Include="LblSet.cs" />
     <Compile Include="Modulecs.cs" />
