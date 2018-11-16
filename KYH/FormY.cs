@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace KYH
 {
@@ -31,6 +32,7 @@ namespace KYH
         ArrayList col2_list = new ArrayList();
         ArrayList item2_list = new ArrayList();
 
+        CheckBox CBOX = new CheckBox();
 
         private void FormY_Load(object sender, EventArgs e)
         {
@@ -86,18 +88,25 @@ namespace KYH
             tabControl1.Padding = new Point(22, 20);
             tabControl1.Size = new Size(600, 500);
             tabControl1.TabIndex = 0;
+            tabControl1.ShowToolTips = true;
 
+            
             tabPage1.Location = new Point(4, 22);
             tabPage1.Size = new Size(466, 311);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "시작 프로그램";
             tabPage1.BackColor = Color.WhiteSmoke;
+            tabPage1.ToolTipText = "시작 프로그램";
+            
 
+            ToolTip toolTip2 = new ToolTip();
             tabPage2.Location = new Point(4, 22);
             tabPage2.Size = new Size(192, 74);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "서비스 관리";
             tabPage2.BackColor = Color.WhiteSmoke;
+            tabPage2.ToolTipText = "서비스 관리";
+            
 
             //버튼/라벨 모듈--------------------------------------------------------------------------------------------------------------
 
@@ -130,8 +139,6 @@ namespace KYH
             tabPage2.Controls.Add(lv2);
             Controls.Add(tabControl1);
 
-
-
         }
 
         
@@ -152,7 +159,7 @@ namespace KYH
             lv.View = View.Details;
             lv.BackColor = Color.Gainsboro;
             lv.ForeColor = Color.Black;
-
+            
 
             bool I_check = Items_create(item_list, lv);
             bool h_check = col_create(col_list, lv);
