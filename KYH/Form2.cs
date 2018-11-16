@@ -74,15 +74,15 @@ namespace KYH
             Controls.Add(label2);
 
             pan1 = new Panel();
-            pan1.Height = 150;
+            pan1.Height = 150+20;
             pan1.Width = 30;
-            pan1.Location = new Point(400, 120 + 30);
+            pan1.Location = new Point(400, 120 + 10);
             pan1.BackColor = Color.DarkBlue;
 
             pan2 = new Panel();
-            pan2.Height = 150;
+            pan2.Height = 150+20;
             pan2.Width = 30;
-            pan2.Location = new Point(400, 120 + 30);
+            pan2.Location = new Point(400, 120 + 10);
             pan2.BackColor = Color.DarkBlue;
 
             pan3 = new Panel();
@@ -96,15 +96,15 @@ namespace KYH
             Controls.Add(pan3);
 
             pan4 = new Panel();
-            pan4.Height = 100;
+            pan4.Height = 110;
             pan4.Width = 30;
-            pan4.Location = new Point(600, 170 + 30);
+            pan4.Location = new Point(600, 170);
             pan4.BackColor = Color.DarkBlue;
 
             pan5 = new Panel();
-            pan5.Height = 100;
+            pan5.Height = 110;
             pan5.Width = 30;
-            pan5.Location = new Point(600, 170 + 30);
+            pan5.Location = new Point(600, 170);
             pan5.BackColor = Color.DarkBlue;
 
             pan6 = new Panel();
@@ -129,7 +129,7 @@ namespace KYH
             {
                 timer.Stop();
                 label3.AutoSize = true;
-                label3.Text = "25%";
+                label3.Text = "22%";
                 label3.Font = new Font("고딕", 10, FontStyle.Bold);
                 label3.ForeColor = Color.Red;
                 label3.Location = new Point(396, 15 + 30);
@@ -154,7 +154,7 @@ namespace KYH
                 pan4.Height = 1;
 
             }
-            else if (pan4.Height == 88)
+            else if (pan4.Height == 80)
             {
                 timer1.Stop();
 
@@ -179,8 +179,7 @@ namespace KYH
 
         private void BtnHard_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("하드디스크 최적화");
-
+            
             timer = new Timer();
             timer.Interval = 20;
             timer.Tick += Timer_Tick;
@@ -192,8 +191,7 @@ namespace KYH
 
         private void BtnProcess_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("프로세스 최적화");
-
+           
             timer1 = new Timer();
             timer1.Interval = 20;
             timer1.Tick += Timer_Tick1;
